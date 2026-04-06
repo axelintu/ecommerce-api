@@ -10,7 +10,14 @@ cd ecommerce-api
 npm install 
 ```
 
-Rename .env.example to .env and populate the variables
+Copy and rename .env.example to .env and populate the variables
 ```bash
-mv .env.example .env
+cp .env.example .env
+```
+
+### Start the project
+
+For development use
+```bash
+npm run dev
 ```
