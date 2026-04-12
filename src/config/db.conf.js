@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
 	try {
-		const connection = await mongoose.connect("mongodb://localhost:27017/ecommerce-db-api");
-		console.log(`MongoDB connected ${connection.connection.host}`);
+		const dbConnection = await mongoose.connect("mongodb://localhost:27017/ecommerce-db-api");
+		console.log(`MongoDB connected ${dbConnection.connection.host}`);
 	} catch (error) {
 		console.error(error, "Error connecting to MongoDB");
-		process.exist(1);
+		process.exit(1);
 	}
 };
 
