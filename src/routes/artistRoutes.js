@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { getArtists, getArtistById, createArtist, updateArtist, deleteArtist } from "../controllers/artistController.js";
+import {
+	getArtists,
+	getArtistById,
+	createArtist,
+	updateArtist,
+	deleteArtist
+} from "../controllers/artistController.js";
 
 const router = Router();
 

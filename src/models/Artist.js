@@ -18,6 +18,16 @@ const artistSchema = new mongoose.Schema({
 		type: String,
 		trim: true
 	},
+	imageURL: {
+		type: String,
+		required: false,
+		default: null
+	},
+	backgroundImageURL: {
+		type: String,
+		required: false,
+		default: null
+	},
 }, {
 	timestamps: true
 });
