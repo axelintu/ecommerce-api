@@ -14,6 +14,11 @@ Copy and rename .env.example to .env and populate the variables
 ```bash
 cp .env.example .env
 ```
+Populate environment variables, run the following command twice and copy and paste the two different results in the JWT_SECRET and JWT_REFRESH_TOKEN.
+
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
 
 ### Start the project
 

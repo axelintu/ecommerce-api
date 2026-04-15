@@ -1,7 +1,10 @@
-import "dotenv/config";
 import e from "express";
+import dotenv from "dotenv";
 import connectDB from "./src/config/db.conf.js";
+import errorHandler from "./src/middlewares/errorHandler.js";
+import logger from "./src/middlewares/logger.js";
 import routes from "./src/routes/index.js";
+dotenv.config();
 
 const app = e();
 const port = process.env.PORT;
