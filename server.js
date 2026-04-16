@@ -11,13 +11,16 @@ const port = process.env.PORT;
 
 app.use(e.json());
 app.use(logger);
-app.use(errorHandler);
 
 connectDB();
 
 app.get("/api", (req, res) => {
 	res.send("API Ecommerce con MongoDB");
 });
+
+app.use("/api", routes);
+
+app.use(errorHandler);
 
 app.use((req, res) => {
 	res.status(404).json({
@@ -26,8 +29,6 @@ app.use((req, res) => {
 		url: req.originalUrl,
 	});
 });
-
-app.use("/api", routes);
 
 app.listen(port, () => {
 	console.log(`Server running on http://localhost:${port}`);
