@@ -1,84 +1,75 @@
-import Artist from "../models/Artist.js";
-export const getArtists = async (req, res, next) => {
+import Order from "../models/Order.js";
+
+export const getOrders = async (req, res, next) => {
 	try {
-		const artists = await Artist.find();
-		res.status(200).json(artists)
-	} catch (error) {
-		next(error);
+		const orders = await Order.find()
+			.populate("user")
+			.populate("products.productId")
+			.populate("paymentMethod")
+			.populate("address");
+		res.status(200).json(orders)
 	}
+	catch (error) { next(error); }
 };
 
-export const getArtistById = async (req, res, next) => {
+export const getOrderById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const artist = await Artist.findById(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found " });
+		const order = await Order.findById(id)
+			.populate("user")
+			.populate("products.productId")
+			.populate("paymentMethod")
+			.populate("address");
+		;
+		if (!order) {
+			return res.status(404).json({ message: "Order not found" });
 		}
-		res.status(200).json(artist);
-	} catch (error) {
-		next(error);
+		res.status(200).json(order);
 	}
+	catch (error) { next(error); }
 };
-export const createArtist = async (req, res, next) => {
+
+export const createOrder = async (req, res, next) => {
 	try {
 		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
+			user,
+			products,
+			address,
+			paymentMethod,
+			shippingCost,
+			totalPrice
 		} = req.body;
-		const newArtist = await Artist.create({
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
+
+		const newOrder = await Order.create({
+			user,
+			products,
+			address,
+			paymentMethod,
+			shippingCost,
+			totalPrice
 		});
-		res.status(201).json(newArtist);
-	} catch (error) {
-		next(error);
+		await newOrder.populate("user");
+		await newOrder.populate("products.productId");
+
+		res.status(201).json(newOrder);
 	}
+	catch (error) { next(error); }
 };
-export const updateArtist = async (req, res, next) => {
+export const updateOrderStatus = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
-		} = req.body;
-		const updatedArtist = await Artist.findByIdAndUpdate(
+		const { status, paymentStatus } = req.body;
+		const updatedOrder = await Order.findByIdAndUpdate(
 			id,
-			{
-				urlName,
-				name,
-				description,
-				imageURL,
-				backgroundImageURL
-			},
+			{ status, paymentStatus },
 			{ new: true }
 		);
-		if (!updatedArtist) {
-			return res.status(404).json({ message: "Artist not found" });
+
+		if (!updatedOrder) {
+			return res.status(404).json({ message: "Order not found" });
 		}
-		res.status(200).json(updatedArtist);
-	} catch (error) {
-		next(error);
+
+		res.status(200).json(updatedOrder);
 	}
-};
-export const deleteArtist = async (req, res, next) => {
-	try {
-		const { id } = req.params;
-		const artist = await Artist.findByIdAndDelete(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found" });
-		}
-		res.status(204).send();
-	} catch (error) {
-		next(error);
-	}
+	catch (error) { next(error); }
 };

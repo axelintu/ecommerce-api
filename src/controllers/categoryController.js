@@ -11,7 +11,7 @@ export const getCategories = async (req, res, next) => {
 export const getCategoryById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const category = await Category.findById(id);
+		const category = await Category.findById(id).populate("parentCategory");
 		if (!category) {
 			return res.status(404).json({ message: "Category not found " });
 		}
@@ -27,15 +27,18 @@ export const createCategory = async (req, res, next) => {
 			name,
 			description,
 			imageURL,
-			backgroundImageURL
+			backgroundImageURL,
+			parentCategory
 		} = req.body;
 		const newCategory = await Category.create({
 			urlName,
 			name,
 			description,
 			imageURL,
-			backgroundImageURL
+			backgroundImageURL,
+			parentCategory: parentCategory || null
 		});
+		await newCategory.populate("parentCategory");
 		res.status(201).json(newCategory);
 	}
 	catch (error) { next(error); }
@@ -49,7 +52,8 @@ export const updateCategory = async (req, res, next) => {
 			name,
 			description,
 			imageURL,
-			backgroundImageURL
+			backgroundImageURL,
+			parentCategory
 		} = req.body;
 		const updatedCategory = await Category.findByIdAndUpdate(
 			id,
@@ -58,10 +62,11 @@ export const updateCategory = async (req, res, next) => {
 				name,
 				description,
 				imageURL,
-				backgroundImageURL
+				backgroundImageURL,
+				parentCategory: parentCategory || null,
 			},
-			{ new: true }
-		);
+			{ new: true },
+		).populate("parentCategory");
 		if (!updatedCategory) {
 			return res.status(404).json({ message: "Category not found" });
 		}
@@ -73,10 +78,11 @@ export const updateCategory = async (req, res, next) => {
 export const deleteCategory = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const category = await Category.findByIdAndDelete(id);
+		const category = await Category.findOne(id);
 		if (!category) {
 			return res.status(404).json({ message: "Category not found" });
 		}
+		await Category.findByIdAndDelete(id);
 		res.status(204).send();
 	}
 	catch (error) { next(error); }

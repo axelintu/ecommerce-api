@@ -1,84 +1,83 @@
-import Artist from "../models/Artist.js";
-export const getArtists = async (req, res, next) => {
+import Wishlist from "../models/Wishlist";
+export const getWishlists = async (req, res, next) => {
 	try {
-		const artists = await Artist.find();
-		res.status(200).json(artists)
+		const wishlists = await Wishlist.find()
+			.populate("user")
+			.populate("products");
+		res.status(200).json(wishlists)
+	}
+	catch (error) { next(error); }
+};
+
+export const getWishlistByUser = async (req, res, next) => {
+	try {
+		// const userId = req.userId;
+		const userId = req.body.userId;
+		const wishlist = await Wishlist.findById({ user: id });
+		if (!wishlist) {
+			return res.status(404).json({ message: "Wishlist not found " });
+		}
+		res.status(200).json(wishlist);
+	}
+	catch (error) { next(error); }
+};
+
+export const addProductToWishlist = async (req, res, next) => {
+	try {
+		const { userId, productId } = req.body;
+		let wishlist = await WishList.findOne({ user: userId });
+
+		if (!wishlist) {
+			wishlist = new WishList({ user: userId, products: [productId] });
+		} else {
+			const alreadyAdded = wishlist.products.some(
+				(p) => p.toString() === productId,
+			);
+			if (alreadyAdded) {
+				return res
+					.status(200)
+					.json({ message: "Product already in wishlist", wishlist });
+			}
+			wishlist.products.push(productId);
+		}
+
+		await wishlist.save();
+		await wishlist.populate("user");
+		await wishlist.populate("products");
+		res.status(200).json(wishlist);
+	}
+	catch (error) { next(error); }
+};
+
+export const removeProductFromWishlist = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const { productId } = req.body;
+		const wishlist = await WishList.findById(id);
+		if (!wishlist) {
+			return res.status(404).json({ message: "Wishlist not found" });
+		}
+		wishlist.products = wishlist.products.filter(
+			(p) => p.toString() !== productId,
+		);
+		await wishlist.save();
+		await wishlist.populate("user");
+		await wishlist.populate("products");
+		res.status(200).json(wishlist);
 	} catch (error) {
 		next(error);
 	}
 };
 
-export const getArtistById = async (req, res, next) => {
+export const deleteWishlist = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const artist = await Artist.findById(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found " });
+		const wishlistToDelete = await Wishlist.findOne(id);
+		if (!wishlistToDelete) {
+			return res.status(404).json({ message: "Wishlist not found" });
 		}
-		res.status(200).json(artist);
-	} catch (error) {
-		next(error);
-	}
-};
-export const createArtist = async (req, res, next) => {
-	try {
-		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
-		} = req.body;
-		const newArtist = await Artist.create({
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
-		});
-		res.status(201).json(newArtist);
-	} catch (error) {
-		next(error);
-	}
-};
-export const updateArtist = async (req, res, next) => {
-	try {
-		const { id } = req.params;
-		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
-		} = req.body;
-		const updatedArtist = await Artist.findByIdAndUpdate(
-			id,
-			{
-				urlName,
-				name,
-				description,
-				imageURL,
-				backgroundImageURL
-			},
-			{ new: true }
-		);
-		if (!updatedArtist) {
-			return res.status(404).json({ message: "Artist not found" });
-		}
-		res.status(200).json(updatedArtist);
-	} catch (error) {
-		next(error);
-	}
-};
-export const deleteArtist = async (req, res, next) => {
-	try {
-		const { id } = req.params;
-		const artist = await Artist.findByIdAndDelete(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found" });
-		}
+		await Wishlist.findByIdAndDelete(id);
 		res.status(204).send();
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };

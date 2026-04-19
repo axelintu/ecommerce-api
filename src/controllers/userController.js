@@ -10,9 +10,8 @@ const getUsers = async (req, res, next) => {
 	try {
 		const users = await User.find().select("-password");
 		res.status(200).json(users);
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
 
 const getUserById = async (req, res, next) => {
@@ -23,9 +22,8 @@ const getUserById = async (req, res, next) => {
 			return res.status(404).json({ message: "User not found" });
 		}
 		res.status(200).json(user);
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
 
 const createUser = async (req, res, next) => {
@@ -43,9 +41,8 @@ const createUser = async (req, res, next) => {
 		const userResponse = newUser.toObject();
 		delete userResponse.password;
 		res.status(201).json(userResponse);
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
 
 const updateUser = async (req, res, next) => {
@@ -62,9 +59,8 @@ const updateUser = async (req, res, next) => {
 			return res.status(404).json({ message: "User not found" });
 		}
 		res.status(200).json(updatedUser);
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
 
 const deleteUser = async (req, res, next) => {
@@ -75,9 +71,8 @@ const deleteUser = async (req, res, next) => {
 			return res.status(404).json({ message: "User not found" });
 		}
 		res.status(204).send();
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
 
 export { getUsers, getUserById, createUser, updateUser, deleteUser };

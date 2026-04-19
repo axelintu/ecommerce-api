@@ -1,84 +1,119 @@
-import Artist from "../models/Artist.js";
-export const getArtists = async (req, res, next) => {
+import PaymentMethod from "../models/PaymentMethod.js";
+
+export const getPaymentMethods = async (req, res, next) => {
 	try {
-		const artists = await Artist.find();
-		res.status(200).json(artists)
-	} catch (error) {
-		next(error);
+		const paymentMethods = await PaymentMethod.find()
+			.populate("user");
+		res.status(200).json(paymentMethods)
 	}
+	catch (error) { next(error); }
 };
 
-export const getArtistById = async (req, res, next) => {
+export const getPaymentMethodById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const artist = await Artist.findById(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found " });
+		const paymentMethod = await PaymentMethod.findById(id)
+			.populate("user");
+		if (!paymentMethod) {
+			return res
+				.status(404)
+				.json({ message: "PaymentMethod not found" });
 		}
-		res.status(200).json(artist);
-	} catch (error) {
-		next(error);
+		res.status(200).json(paymentMethod);
 	}
+	catch (error) { next(error); }
 };
-export const createArtist = async (req, res, next) => {
+
+export const createPaymentMethod = async (req, res, next) => {
 	try {
 		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
+			user,
+			type,
+			cardNumber,
+			cardHolderName,
+			expiryDate,
+			paypalEmail,
+			bankName,
+			accountNumber,
+			isDefault,
+			cvv,
 		} = req.body;
-		const newArtist = await Artist.create({
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
+
+		if (isDefault) {
+			await PaymentMethod.updateMany({ user }, { isDefault: false });
+		}
+
+		const newPaymentMethod = await PaymentMethod.create({
+			user,
+			type,
+			cardNumber,
+			cardHolderName,
+			expiryDate,
+			paypalEmail,
+			bankName,
+			accountNumber,
+			isDefault: isDefault || false,
+			cvv,
 		});
-		res.status(201).json(newArtist);
-	} catch (error) {
-		next(error);
+		await newPaymentMethod.populate("user");
+		res.status(201).json(newPaymentMethod);
 	}
+	catch (error) { next(error); }
 };
-export const updateArtist = async (req, res, next) => {
+
+export const updatePaymentMethod = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const {
-			urlName,
-			name,
-			description,
-			imageURL,
-			backgroundImageURL
+			user,
+			type,
+			cardNumber,
+			cardHolderName,
+			expiryDate,
+			paypalEmail,
+			bankName,
+			accountNumber,
+			isDefault,
+			cvv,
 		} = req.body;
-		const updatedArtist = await Artist.findByIdAndUpdate(
+
+		const existingPaymentMethod = await PaymentMethod.findById(id);
+		if (!existingPaymentMethod) {
+			return res
+				.status(404)
+				.json({ message: "Payment method not found" });
+		}
+
+		const updatedPaymentMethod = await PaymentMethod.findByIdAndUpdate(
 			id,
 			{
-				urlName,
-				name,
-				description,
-				imageURL,
-				backgroundImageURL
+				user,
+				type,
+				cardNumber,
+				cardHolderName,
+				expiryDate,
+				paypalEmail,
+				bankName,
+				accountNumber,
+				isDefault,
+				cvv,
 			},
 			{ new: true }
-		);
-		if (!updatedArtist) {
-			return res.status(404).json({ message: "Artist not found" });
-		}
-		res.status(200).json(updatedArtist);
-	} catch (error) {
-		next(error);
+		).populate("user");
+		res.status(200).json(updatedPaymentMethod);
 	}
+	catch (error) { next(error); }
 };
-export const deleteArtist = async (req, res, next) => {
+
+export const deletePaymentMethod = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const artist = await Artist.findByIdAndDelete(id);
-		if (!artist) {
-			return res.status(404).json({ message: "Artist not found" });
+		const paymentMethodToDelete = await PaymentMethod.findOne(id);
+		if (!paymentMethodToDelete) {
+			return res.status(404).json({ message: "PaymentMethod not found" });
 		}
+		await PaymentMethod.findByIdAndDelete(id);
 		res.status(204).send();
-	} catch (error) {
-		next(error);
 	}
+	catch (error) { next(error); }
 };
