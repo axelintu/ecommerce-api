@@ -1,4 +1,5 @@
 import Artist from "../models/Artist.js";
+
 export const getArtists = async (req, res, next) => {
 	try {
 		const artists = await Artist.find();
@@ -13,7 +14,7 @@ export const getArtistById = async (req, res, next) => {
 		const { id } = req.params;
 		const artist = await Artist.findById(id);
 		if (!artist) {
-			return res.status(404).json({ message: "Artist not found " });
+			return res.status(404).json({ message: "Artist not found" });
 		}
 		res.status(200).json(artist);
 	} catch (error) {
@@ -29,13 +30,14 @@ export const createArtist = async (req, res, next) => {
 			imageURL,
 			backgroundImageURL
 		} = req.body;
-		const newArtist = await Artist.create({
+		const newArtist = new Artist({
 			urlName,
 			name,
 			description,
 			imageURL,
 			backgroundImageURL
 		});
+		await newArtist.save();
 		res.status(201).json(newArtist);
 	} catch (error) {
 		next(error);
