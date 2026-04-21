@@ -7,6 +7,14 @@ import {
 	updateProduct,
 	deleteProduct,
 } from "../controllers/productController.js";
+import validate from "../middleware/validation.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import isAdmin from "../middleware/isAdminMiddleware.js";
+import {
+	productIdValidation,
+	createProductValidation,
+	updateProductValidation
+} from "./routesValidation/productValidation.js";
 
 const router = express.Router();
 
@@ -22,21 +30,35 @@ router.get(
 
 router.get(
 	"/products/:id",
+	productIdValidation,
+	validate,
 	getProductById
 );
 
 router.post(
 	"/products",
+	authMiddleware,
+	isAdmin,
+	createProductValidation,
+	validate,
 	createProduct,
 );
 
 router.put(
 	"/products/:id",
+	authMiddleware,
+	isAdmin,
+	updateProductValidation,
+	validate,
 	updateProduct,
 );
 
 router.delete(
 	"/products/:id",
+	authMiddleware,
+	isAdmin,
+	productIdValidation,
+	validate,
 	deleteProduct,
 );
 
