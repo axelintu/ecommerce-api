@@ -18,19 +18,19 @@ import {
 const router = express.Router();
 
 router.get(
-	"/categories",
+	"/",
 	getCategories
 );
 
 router.get(
-	"/categories/:id",
+	"/:id",
 	categoryIdValidation,
 	validate,
 	getCategoryById
 );
 
 router.post(
-	"/categories",
+	"/",
 	authMiddleware,
 	isAdmin,
 	createCategoryValidation,
@@ -39,7 +39,7 @@ router.post(
 );
 
 router.put(
-	"/categories/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	updateCategoryValidation,
@@ -48,7 +48,7 @@ router.put(
 );
 
 router.delete(
-	"/categories/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	categoryIdValidation,

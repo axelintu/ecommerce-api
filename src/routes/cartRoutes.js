@@ -26,7 +26,7 @@ router.get("/cart",
 );
 
 router.get(
-	"/cart/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	cartIdValidation,
@@ -35,7 +35,7 @@ router.get(
 );
 
 router.get(
-	"/cart/user/:id",
+	"/user/:id",
 	authMiddleware,
 	userIdValidation,
 	validate,
@@ -43,7 +43,7 @@ router.get(
 );
 
 router.post(
-	"/cart",
+	"/",
 	authMiddleware,
 	createCartValidation,
 	validate,
@@ -51,7 +51,7 @@ router.post(
 );
 
 router.put(
-	"/cart/:id",
+	"/:id",
 	authMiddleware,
 	putCartValidation,
 	validate,
@@ -59,7 +59,7 @@ router.put(
 );
 
 router.delete(
-	"/cart/:id",
+	"/:id",
 	authMiddleware,
 	cartIdValidation,
 	validate,

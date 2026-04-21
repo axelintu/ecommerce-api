@@ -19,24 +19,24 @@ import {
 const router = express.Router();
 
 router.get(
-	"/products/search",
+	"/search",
 	searchProducts
 );
 
 router.get(
-	"/products",
+	"/",
 	getProducts
 );
 
 router.get(
-	"/products/:id",
+	"/:id",
 	productIdValidation,
 	validate,
 	getProductById
 );
 
 router.post(
-	"/products",
+	"/",
 	authMiddleware,
 	isAdmin,
 	createProductValidation,
@@ -45,7 +45,7 @@ router.post(
 );
 
 router.put(
-	"/products/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	[...productIdValidation, ...updateProductValidation],
@@ -54,7 +54,7 @@ router.put(
 );
 
 router.delete(
-	"/products/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	productIdValidation,

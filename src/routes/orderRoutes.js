@@ -17,13 +17,13 @@ import {
 const router = express.Router();
 
 router.get(
-	"/orders",
+	"/",
 	authMiddleware,
 	isAdmin,
 	getOrders);
 
 router.get(
-	"/orders/:id",
+	"/:id",
 	authMiddleware,
 	orderIdValidation,
 	validate,
@@ -31,7 +31,7 @@ router.get(
 );
 
 router.post(
-	"/orders",
+	"/",
 	authMiddleware,
 	createOrderValidation,
 	validate,
@@ -39,7 +39,7 @@ router.post(
 );
 
 router.put(
-	"/orders/:id",
+	"/:id",
 	authMiddleware,
 	updateOrderStatusValidation,
 	validate,
