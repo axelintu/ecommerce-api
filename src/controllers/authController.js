@@ -14,7 +14,7 @@ const generateRefreshToken = (userId) => {
 	const refreshToken = jwt.sign(
 		{ userId },
 		process.env.JWT_REFRESH_TOKEN,
-		{ expiresIn: " 7d" }
+		{ expiresIn: "7d" }
 	);
 	return { token: refreshToken, userId };
 }
@@ -44,9 +44,9 @@ export const register = async (req, res, next) => {
 		const newUser = new User(
 			{ name, email, password: hashPassword, role, phone }
 		);
-
 		await newUser.save();
-		res.status(201).json({ name, email, phone });
+		const _id = newUser._id;
+		res.status(201).json({ _id, name, email, phone });
 	} catch (error) {
 		next(error);
 	}
