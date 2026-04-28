@@ -12,8 +12,8 @@ export const getWishlists = async (req, res, next) => {
 export const getWishlistByUser = async (req, res, next) => {
 	try {
 		// const userId = req.userId;
-		const userId = req.body.userId;
-		const wishlist = await Wishlist.findById({ user: id });
+		const userId = req.params.userId;
+		const wishlist = await Wishlist.findOne({ user: userId });
 		if (!wishlist) {
 			return res.status(404).json({ message: "Wishlist not found " });
 		}
