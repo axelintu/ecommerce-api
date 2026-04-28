@@ -1,0 +1,46 @@
+info:
+  name: "New: CD/DVD/Blu-Ray"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+          "urlName": "cd-dvd-bluray",
+          "name": "CD/DVD/Blu-Ray",
+          "description": "Álbumes, videos en vivo y contenido exclusivo de tus artistas en formatos físicos. Disfruta de la mejor calidad de audio y video.",
+          "imageURL": "https://placehold.co/800x600.png",
+          "parentCategory": null
+        }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const data = res.getBody();
+        console.log(data);
+
+        // Safety check: Ensure data exists and is an object
+        if (data && typeof data === 'object') {
+          const {_id} = data;
+
+          bru.setVar("cd-dvd-bluray", _id);
+        } else {
+          console.error("No data received in response body");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

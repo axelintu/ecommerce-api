@@ -1,0 +1,15 @@
+info:
+  name: Get User Addresses
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{APIaddress}}/addresses"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

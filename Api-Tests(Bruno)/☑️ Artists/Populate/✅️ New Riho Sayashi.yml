@@ -1,0 +1,39 @@
+info:
+  name: ✅️ New Riho Sayashi
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "riho-sayashi",
+        "name": "Riho Sayashi",
+        "description": "Cantante y artista japonesa, conocida por su paso como integrante de Morning Musume. Destaca por su potente voz, presencia escénica y versatilidad en proyectos solistas y musicales. Activa en actividades en Japón y proyectos relacionados con pop y entretenimiento.",
+        "imageURL": "/images/prods/riho-sayashi/riho-sayashi.jpg"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const id = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_riho-sayashi", id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

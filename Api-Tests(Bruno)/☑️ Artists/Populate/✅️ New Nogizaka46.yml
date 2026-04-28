@@ -1,0 +1,39 @@
+info:
+  name: ✅️ New Nogizaka46
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "nogizaka46",
+        "name": "Nogizaka46 (乃木坂46)",
+        "description": "Grupo de idols femenino japonés formado en 2011 como el rival oficial de AKB48. Producido por Yasushi Akimoto, el grupo es conocido por su elegancia, armonías vocales y por haber cultivado algunas de las personalidades más influyentes en el entretenimiento japonés actual.",
+        "imageURL": "https://placehold.co/800x600.png"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const id = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_nogizaka46", id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

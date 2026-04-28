@@ -1,0 +1,30 @@
+info:
+  name: Edit Category (Photobooks)
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/artists{{photobooks}}"
+  body:
+    type: json
+    data: |2-
+        {
+          "urlName": "photobooks",
+          "name": "Photobooks y Revistas",
+          "description": "Libros de fotografías oficiales, revistas y programas de conciertos. Captura los mejores momentos y visuales de la carrera de tus artistas.",
+          "imageURL": "https://placehold.co/800x600.png",
+          "parentCategory": null
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

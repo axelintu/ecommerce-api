@@ -1,0 +1,36 @@
+info:
+  name: ✅️ Edit Artist (Babymetal)
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/artists{{artist_babymetal}}"
+  body:
+    type: json
+    data: |-
+      {
+        "description": "Grupo de metal/pop japonés formado en 2010. Combina el J-pop y cultura idol con heavy metal de manera única. Conocido por sus coreografías elaboradas, su sonido experimental y su comunidad global de fans apasionados.",
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const token = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_babymetal", _id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

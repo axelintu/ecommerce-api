@@ -1,0 +1,79 @@
+info:
+  name: New Product (Babymetal)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |2-
+        {
+          "_id": "1764724545076",
+          "name": "Playera Slaughter To Prevail - BABY SLAUGHTER",
+          "descriptionArray": {
+            "type": "p",
+            "data": [
+              "Prepárate para el apocalipsis más adorable.",
+              "Esta camiseta oficial crossover trae el caos kawaii de *BABYMETAL* al brutal universo de *Slaughter to Prevail*. El estampado frontal presenta un oso rosa demoníaco, guerreros chibi, calabazas en llamas y suficiente actitud para arrasar un estadio.",
+              "Lo lindo se encuentra con la crueldad. El metal se encuentra con la locura.",
+              "Esta camiseta es suave, transpirable y está diseñada para resistir tanto en pogo como en reinos mágicos. Su impresión de alta calidad garantiza que cada detalle se mantenga nítido tanto en el escenario como en la calle."
+            ]
+          },
+          "featuresArray": {
+            "type": "li",
+            "data": [
+              "Colaboración oficial de BABYMETAL x Slaughter To Prevail",
+              "Gráfico frontal de gran tamaño con arte de personaje personalizado.",
+              "Serigrafía duradera y de alta calidad.",
+              "Camisa de algodón Gildan Hammer suave y transpirable",
+              "Edición limitada, solo para verdaderos fanáticos"
+            ]
+          },
+          "notes": [{
+            "data": "Representaciones del producto: Tenga en cuenta que la mayoría de las imágenes de nuestra tienda son maquetas, no fotos reales. Estas representaciones digitales muestran el aspecto final del producto, pero el producto real puede variar ligeramente.",
+            "class": "info"
+          }
+          ],
+          "price": 454.99,
+          "image": "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png",
+          "images": [
+            "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png",
+            "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-7719429.jpg",
+            "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-8439721.jpg"
+          ],
+          "artist": 69e71abda1e1b090a92e1d62,
+          "category": {
+            "_id": "apparel",
+            "name": "Ropa Exclusiva/Merch Oficial",
+            "description": "Camisetas, sudaderas y prendas de ropa oficial de tus bandas y artistas favoritos. Llevá el estilo de tu artista a todos lados.",
+            "imageURL": "https://placehold.co/800x600.png",
+            "parentCategory": {
+              "_id": "merch-oficial",
+              "name": "Merch Oficial",
+              "description": "Toda la mercancía oficial de tus artistas favoritos. Desde ropa hasta accesorios exclusivos vendidos en tours y tiendas oficiales.",
+              "imageURL": "https://placehold.co/800x600.png",
+              "parentCategory": null
+            }
+          },
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

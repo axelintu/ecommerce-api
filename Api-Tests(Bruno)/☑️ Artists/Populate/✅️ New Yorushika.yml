@@ -1,0 +1,39 @@
+info:
+  name: ✅️ New Yorushika
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "yorushika",
+        "name": "Yorushika (ヨルシカ)",
+        "description": "Banda de rock/pop japonesa formada en 2017. Conocida por sus letras introspectivas y su sonido emotivo que mezcla elementos de rock alternativo con pop melódico. Característica distintiva: los miembros se presentan de manera anónima sin mostrar sus rostros. Ha ganado popularidad por su música líricamente profunda.",
+        "imageURL": "https://placehold.co/800x600.png"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const id = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_yorushika", id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

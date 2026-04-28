@@ -1,0 +1,39 @@
+info:
+  name: ✅️ New Ado
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "ado",
+        "name": "Ado",
+        "description": "Cantante japonesa que debutó profesionalmente en 2020. Se caracteriza por su potente y versátil rango vocal que abarca desde gruñidos profundos hasta agudos melódicos. Al igual que otros artistas modernos, mantiene su identidad visual en el anonimato utilizando avatares de anime.",
+        "imageURL": "https://placehold.co/800x600.png"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const id = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_ado", id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

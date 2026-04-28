@@ -1,0 +1,27 @@
+name: dev
+color: "#CE4F3B"
+variables:
+  - name: APIaddress
+    value: http://localhost:3000/api
+  - secret: true
+    name: JWT
+  - name: artist_babymetal
+    value: 69e71abda1e1b090a92e1d62
+  - name: artist_MRSGREENAPPLE
+    value: 69f042fac4fdca569efc8a5e
+  - name: artist_yorushika
+    value: ""
+  - name: artist_BANDMAID
+    value: ""
+  - name: artist_riho-sayashi
+    value: ""
+  - name: artist_ryokushaka
+    value: ""
+  - name: artist_nogizaka46
+    value: ""
+  - name: artist_ado
+    value: ""
+  - name: artist_hanabie
+    value: ""
+  - name: artist_haku
+    value: ""

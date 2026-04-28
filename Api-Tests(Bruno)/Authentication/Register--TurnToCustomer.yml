@@ -1,0 +1,71 @@
+info:
+  name: Register->TurnToCustomer
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{APIaddress}}/auth/register"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "Ajolote Macías",
+          "email": "abel@fa4.com",
+          "password": "clavesimple",
+          "phone": "1239072348"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const data = res.getBody();
+        console.log(data);
+
+        // Safety check: Ensure data exists and is an object
+        if (data && typeof data === 'object') {
+          const {id, name, email, phone, role} = data;
+
+          // Use optional chaining or defaults if you're worried about missing fields
+          bru.setVar("newId", id);
+          bru.setVar("newName", name);
+          bru.setVar("newEmail", email);
+          bru.setVar("newPhone", phone);
+
+          // Trigger the next request
+          bru.runRequest("Users/UpgradeToCustomer");
+        } else {
+          console.error("No data received in response body");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Registers a new user account.
+
+  Request body:
+
+  - `name` (string): Full name of the user
+      
+  - `email` (string): User email address
+      
+  - `password` (string): User password
+      
+  - `phone` (string): User phone number
+      
+
+  Example request:
+
+  \`\`\`json  
+  {  
+  "name": "Alejandro Flores Prieto",  
+  "email": "[alejandro@floresprieto2.com](https://mailto:alejandro@floresprieto2.com)",  
+  "password": "clavesimple",  
+  "phone": "1239072348"  
+  }

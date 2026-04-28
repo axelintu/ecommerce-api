@@ -1,0 +1,28 @@
+info:
+  name: Register New Address
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{APIaddress}}/"
+  body:
+    type: json
+    data: |2-
+        {
+          "name": "Casa",
+          "address1": "Calle 1",
+          "address2": "Colonia 1",
+          "postalCode": "20000",
+          "city": "Aguascalientes",
+          "country": "México",
+          "reference": "Entre calle A y B",
+          "default": true
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

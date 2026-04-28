@@ -1,0 +1,29 @@
+info:
+  name: UpgradeToCustomer
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/users/{{newId}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "{{newName}}",
+        "email": "{{newEmail}}",
+        "phone": "{{newPhone}}",
+        "role": "customer"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: receivedID
+      value: ""
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

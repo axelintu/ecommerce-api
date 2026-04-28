@@ -1,0 +1,46 @@
+info:
+  name: "New: Papelería (parent: accesorios)"
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "vinyl",
+        "name": "Vinilos / LP",
+        "description": "Ediciones especiales en vinilo para los amantes del sonido analógico. Una pieza de colección imprescindible para cualquier audiófilo.",
+        "imageURL": "https://placehold.co/800x600.png",
+        "parentCategory": {{cd-dvd-bluray}}
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const data = res.getBody();
+        console.log(data);
+
+        // Safety check: Ensure data exists and is an object
+        if (data && typeof data === 'object') {
+          const {_id} = data;
+
+          bru.setVar("cd-dvd-bluray", _id);
+        } else {
+          console.error("No data received in response body");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

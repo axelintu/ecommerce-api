@@ -1,0 +1,39 @@
+info:
+  name: ✅️ New Hanabie.
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{APIaddress}}/artists"
+  body:
+    type: json
+    data: |-
+      {
+        "urlName": "hanabie",
+        "name": "Hanabie. (花冷え。)",
+        "description": "Banda femenina de metalcore japonesa formada en 2015. Autodefinen su estilo como 'Harajuku-core', mezclando elementos pesados de metalcore y nu-metal con una estética colorida y letras inspiradas en la cultura pop japonesa moderna.",
+        "imageURL": "https://placehold.co/800x600.png"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const id = res.getBody()._id;
+
+        // Save it to the active environment
+        bru.setEnvVar("artist_hanabie", id);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
