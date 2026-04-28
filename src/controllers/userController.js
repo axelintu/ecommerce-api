@@ -58,7 +58,7 @@ const updateUser = async (req, res, next) => {
 		}
 		const updatedUser = await User.findByIdAndUpdate(
 			id,
-			{ name, email, password: hashPassword, role },
+			updateData,
 			{ new: true }
 		).select("-password");
 		if (!updatedUser) {
