@@ -9,7 +9,7 @@ const wishlistIdValidation = [
 const userIdValidation = [
 	param("userId")
 		.isMongoId()
-		.withMessage("User ID must be a valid MongoDB ObjectId"),
+		.withMessage("Wishlist User ID must be a valid MongoDB ObjectId"),
 ];
 
 const addProductValidation = [

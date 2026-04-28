@@ -19,7 +19,8 @@ import {
 
 const router = express.Router();
 
-router.get("/cart",
+router.get(
+	"/",
 	authMiddleware,
 	isAdmin,
 	getCarts

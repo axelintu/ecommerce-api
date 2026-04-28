@@ -19,14 +19,14 @@ import {
 const router = express.Router();
 
 router.get(
-	"/wishlist",
+	"/",
 	authMiddleware,
 	isAdmin,
 	getWishlists
 );
 
 router.get(
-	"/wishlist/user/:id",
+	"/user/:userId",
 	authMiddleware,
 	userIdValidation,
 	validate,
@@ -34,7 +34,7 @@ router.get(
 );
 
 router.post(
-	"/wishlist",
+	"/",
 	authMiddleware,
 	addProductValidation,
 	validate,
@@ -42,7 +42,7 @@ router.post(
 );
 
 router.delete(
-	"/wishlist/:id/product",
+	"/:id/product",
 	authMiddleware,
 	removeProductValidation,
 	validate,
@@ -50,7 +50,7 @@ router.delete(
 );
 
 router.delete(
-	"/wishlist/:id",
+	"/:id",
 	authMiddleware,
 	wishlistIdValidation,
 	validate,

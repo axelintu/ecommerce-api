@@ -18,14 +18,14 @@ import {
 const router = express.Router();
 
 router.get(
-	"/users",
+	"/",
 	authMiddleware,
 	isAdmin,
 	getUsers
 );
 
 router.get(
-	"/users/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	userIdValidation,
@@ -34,7 +34,7 @@ router.get(
 );
 
 router.post(
-	"/users",
+	"/",
 	authMiddleware,
 	isAdmin,
 	createUserValidation,
@@ -43,7 +43,7 @@ router.post(
 );
 
 router.put(
-	"/users/:id",
+	"/:id",
 	authMiddleware,
 	isAdmin,
 	[...userIdValidation, ...updateUserValidation],
@@ -52,11 +52,11 @@ router.put(
 );
 
 router.delete(
-	"/users/:id",
-	userIdValidation,
-	validate,
+	"/:id",
 	authMiddleware,
 	isAdmin,
+	userIdValidation,
+	validate,
 	deleteUser,
 );
 

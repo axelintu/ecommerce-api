@@ -1,7 +1,5 @@
 import { body, param } from "express-validator";
 
-const router = express.Router();
-
 const paymentIdValidation = [
 	param("id")
 		.isMongoId()

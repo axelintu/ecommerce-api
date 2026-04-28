@@ -19,11 +19,13 @@ const router = express.Router();
 
 router.get(
 	"/",
+	authMiddleware,
 	getUserAddresses
 );
 
 router.get(
 	"/:id",
+	authMiddleware,
 	addressIdValidation,
 	validate,
 	getAddressById
@@ -32,7 +34,6 @@ router.get(
 router.post(
 	"/",
 	authMiddleware,
-	isAdmin,
 	createAddressValidation,
 	validate,
 	createAddress,
@@ -41,7 +42,6 @@ router.post(
 router.put(
 	"/:id",
 	authMiddleware,
-	isAdmin,
 	updateAddressValidation,
 	validate,
 	updateAddress,
@@ -50,7 +50,6 @@ router.put(
 router.delete(
 	"/:id",
 	authMiddleware,
-	isAdmin,
 	addressIdValidation,
 	validate,
 	deleteAddress,

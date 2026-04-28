@@ -1,65 +1,59 @@
 import express from "express";
 import {
-	searchProducts,
-	getProducts,
-	getProductById,
-	createProduct,
-	updateProduct,
-	deleteProduct,
-} from "../controllers/productController.js";
+	getPaymentMethods,
+	getPaymentMethodById,
+	createPaymentMethod,
+	updatePaymentMethod,
+	deletePaymentMethod,
+} from "../controllers/paymentMethodController.js";
 import validate from "../middleware/validation.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/isAdminMiddleware.js";
 import {
-	productIdValidation,
-	createProductValidation,
-	updateProductValidation
-} from "./routesValidation/productValidation.js";
+	paymentIdValidation,
+	createPaymentValidation,
+	updatePaymentValidation
+} from "./routesValidation/paymentMethodValidation.js";
 
 const router = express.Router();
 
 router.get(
-	"/products/search",
-	searchProducts
+	"/",
+	authMiddleware,
+	getPaymentMethods
 );
 
 router.get(
-	"/products",
-	getProducts
-);
-
-router.get(
-	"/products/:id",
-	productIdValidation,
+	"/:id",
+	authMiddleware,
+	paymentIdValidation,
 	validate,
-	getProductById
+	getPaymentMethodById,
 );
 
 router.post(
-	"/products",
+	"/",
 	authMiddleware,
-	isAdmin,
-	createProductValidation,
+	createPaymentValidation,
+	authMiddleware,
 	validate,
-	createProduct,
+	createPaymentMethod,
 );
 
 router.put(
-	"/products/:id",
+	"/:id",
 	authMiddleware,
-	isAdmin,
-	updateProductValidation,
+	updatePaymentValidation,
 	validate,
-	updateProduct,
+	updatePaymentMethod,
 );
 
 router.delete(
-	"/products/:id",
+	"/:id",
 	authMiddleware,
-	isAdmin,
-	productIdValidation,
+	paymentIdValidation,
 	validate,
-	deleteProduct,
+	deletePaymentMethod,
 );
 
 export default router;
