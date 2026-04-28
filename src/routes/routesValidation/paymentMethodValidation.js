@@ -7,11 +7,6 @@ const paymentIdValidation = [
 ];
 
 const createPaymentValidation = [
-	body("user")
-		.notEmpty()
-		.withMessage("User is required")
-		.isMongoId()
-		.withMessage("User ID must be a valid MongoDB ObjectId"),
 	body("type")
 		.notEmpty()
 		.withMessage("Payment type is required")

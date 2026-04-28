@@ -1,0 +1,27 @@
+info:
+  name: New payment Abel 1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "credit_card",
+        "cardNumber": "4532123456789010",
+        "cardHolderName": "Abel F A",
+        "expiryDate": "12/28",
+        "cvv": "123",
+        "isDefault": true,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -5,7 +5,7 @@ export const getOrders = async (req, res, next) => {
 	*/
 	try {
 		const orders = await Order.find()
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.productId")
 			.populate("paymentMethod")
 			.populate("address");
@@ -20,7 +20,7 @@ export const getOrderById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const order = await Order.findById(id)
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.productId")
 			.populate("paymentMethod")
 			.populate("address");
@@ -54,7 +54,7 @@ export const createOrder = async (req, res, next) => {
 			shippingCost,
 			totalPrice
 		});
-		await newOrder.populate("user");
+		await newOrder.populate("user", "-password -__v -updatedAt -createdAt");
 		await newOrder.populate("products.productId");
 
 		res.status(201).json(newOrder);

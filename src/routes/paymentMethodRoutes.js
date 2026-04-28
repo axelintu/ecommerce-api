@@ -35,7 +35,6 @@ router.post(
 	"/",
 	authMiddleware,
 	createPaymentValidation,
-	authMiddleware,
 	validate,
 	createPaymentMethod,
 );

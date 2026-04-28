@@ -4,8 +4,13 @@ export const getPaymentMethods = async (req, res, next) => {
 	/*  #swagger.tags = ['PaymentMethods']
 	*/
 	try {
-		const paymentMethods = await PaymentMethod.find()
-			.populate("user");
+		const userId = req.user.userId;
+
+		const paymentMethods = await PaymentMethod.find({ user: userId }).sort({
+			isDefault: -1,
+			_id: -1,
+		})
+		.populate("user", "-password -__v -updatedAt -createdAt");
 		res.status(200).json(paymentMethods)
 	}
 	catch (error) { next(error); }
@@ -17,7 +22,7 @@ export const getPaymentMethodById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const paymentMethod = await PaymentMethod.findById(id)
-			.populate("user");
+			.populate("user", "-password -__v -updatedAt -createdAt");
 		if (!paymentMethod) {
 			return res
 				.status(404)
@@ -33,7 +38,6 @@ export const createPaymentMethod = async (req, res, next) => {
 	*/
 	try {
 		const {
-			user,
 			type,
 			cardNumber,
 			cardHolderName,
@@ -44,6 +48,7 @@ export const createPaymentMethod = async (req, res, next) => {
 			isDefault,
 			cvv,
 		} = req.body;
+		const user = req.user.userId;
 
 		if (isDefault) {
 			await PaymentMethod.updateMany({ user }, { isDefault: false });
@@ -61,8 +66,18 @@ export const createPaymentMethod = async (req, res, next) => {
 			isDefault: isDefault || false,
 			cvv,
 		});
-		await newPaymentMethod.populate("user");
-		res.status(201).json(newPaymentMethod);
+		await newPaymentMethod
+			.populate("user", "-password -__v -updatedAt -createdAt");
+		const returnedPM = {};
+		returnedPM._id           = newPaymentMethod._id;
+		returnedPM.user          = newPaymentMethod.user;
+		returnedPM.type          = newPaymentMethod.type;
+		returnedPM.cardNumber    = newPaymentMethod.cardNumber;
+		returnedPM.expiryDate    = newPaymentMethod.expiryDate;
+		returnedPM.bank          = newPaymentMethod.bank;
+		returnedPM.accountNumber = newPaymentMethod.accountNumber;
+		returnedPM.isDefault     = newPaymentMethod.isDefault;
+		res.status(201).json(returnedPM);
 	}
 	catch (error) { next(error); }
 };
@@ -107,8 +122,19 @@ export const updatePaymentMethod = async (req, res, next) => {
 				cvv,
 			},
 			{ new: true }
-		).populate("user");
-		res.status(200).json(updatedPaymentMethod);
+		).populate("user", "-password -__v -updatedAt -createdAt");
+		const returnedPM = {};
+		returnedPM._id           = updatedPaymentMethod._id;
+		returnedPM.user          = updatedPaymentMethod.user;
+		returnedPM.type          = updatedPaymentMethod.type;
+		returnedPM.cardNumber    = updatedPaymentMethod.cardNumber;
+		returnedPM.cardHolderName= updatedPaymentMethod.cardHolderName;
+		returnedPM.expiryDate    = updatedPaymentMethod.expiryDate;
+		returnedPM.bank          = updatedPaymentMethod.bank;
+		returnedPM.accountNumber = updatedPaymentMethod.accountNumber;
+		returnedPM.isDefault     = updatedPaymentMethod.isDefault;
+
+		res.status(200).json(returnedPM);
 	}
 	catch (error) { next(error); }
 };
@@ -118,7 +144,7 @@ export const deletePaymentMethod = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const paymentMethodToDelete = await PaymentMethod.findOne(id);
+		const paymentMethodToDelete = await PaymentMethod.findOne({_id: id});
 		if (!paymentMethodToDelete) {
 			return res.status(404).json({ message: "PaymentMethod not found" });
 		}

@@ -1,0 +1,23 @@
+info:
+  name: New Payment Ajolote 2
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "cash_on_delivery",
+        "isDefault": false,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

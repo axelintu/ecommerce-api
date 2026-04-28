@@ -1,0 +1,27 @@
+info:
+  name: New payment Elena 1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "credit_card",
+        "cardNumber": "5425233010103010",
+        "cardHolderName": "Elena Gómez",
+        "expiryDate": "06/27",
+        "cvv": "456",
+        "isDefault": true,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

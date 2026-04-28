@@ -5,7 +5,7 @@ export const getCarts = async (req, res, next) => {
 	*/
 	try {
 		const carts = await Cart.find()
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.product");
 		res.status(200).json(carts);
 	}
@@ -33,7 +33,7 @@ export const getCartByUser = async (req, res, next) => {
 	try {
 		const userId = req.params.userId;
 		const cart = await Cart.findOne({ user: userId })
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.product");
 		if (!cart) {
 			return res
@@ -76,7 +76,7 @@ export const createCart = async (req, res, next) => {
 			user,
 			products
 		});
-		await newCart.populate("user");
+		await newCart.populate("user", "-password -__v -updatedAt -createdAt");
 		await newCart.populate("products.product");
 
 		res.status(201).json(newCart);
@@ -97,7 +97,7 @@ export const updateCart = async (req, res, next) => {
 			{ user, products },
 			{ new: true }
 		)
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.pouplate("products.product");
 
 		if (!updatedCart) {
@@ -131,7 +131,7 @@ export const addProductToCart = async (req, res, next) => {
 		}
 
 		await cart.save();
-		await cart.populate("user");
+		await cart.populate("user", "-password -__v -updatedAt -createdAt");
 		await cart.populate("products.productId");
 
 		res.json(cart);

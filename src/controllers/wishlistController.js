@@ -2,7 +2,7 @@ import Wishlist from "../models/Wishlist.js";
 export const getWishlists = async (req, res, next) => {
 	try {
 		const wishlists = await Wishlist.find()
-			.populate("user")
+			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products");
 		res.status(200).json(wishlists)
 	}
@@ -42,7 +42,7 @@ export const addProductToWishlist = async (req, res, next) => {
 		}
 
 		await wishlist.save();
-		await wishlist.populate("user");
+		await wishlist.populate("user", "-password -__v -updatedAt -createdAt");
 		await wishlist.populate("products");
 		res.status(200).json(wishlist);
 	}
@@ -61,7 +61,7 @@ export const removeProductFromWishlist = async (req, res, next) => {
 			(p) => p.toString() !== productId,
 		);
 		await wishlist.save();
-		await wishlist.populate("user");
+		await wishlist.populate("user", "-password -__v -updatedAt -createdAt");
 		await wishlist.populate("products");
 		res.status(200).json(wishlist);
 	} catch (error) {

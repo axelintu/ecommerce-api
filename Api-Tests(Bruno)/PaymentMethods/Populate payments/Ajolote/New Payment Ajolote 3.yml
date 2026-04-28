@@ -1,0 +1,27 @@
+info:
+  name: New Payment Ajolote 3
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "debit_card",
+        "cardNumber": "6011000990139424",
+        "cardHolderName": "Ajolote Macías",
+        "expiryDate": "07/25",
+        "cvv": "567",
+        "isDefault": false,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

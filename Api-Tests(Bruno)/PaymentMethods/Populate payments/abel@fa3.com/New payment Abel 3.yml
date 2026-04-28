@@ -1,0 +1,25 @@
+info:
+  name: New payment Abel 3
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "bank_transfer",
+        "bankName": "BBVA España",
+        "accountNumber": "ES9121000418450200051332",
+        "isDefault": false,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

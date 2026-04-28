@@ -1,0 +1,7 @@
+info:
+  name: elena.gomez
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

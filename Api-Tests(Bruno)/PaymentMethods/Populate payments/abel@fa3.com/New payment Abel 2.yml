@@ -1,0 +1,24 @@
+info:
+  name: New payment Abel 2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "paypal",
+        "paypalEmail": "abel.paypal@gmail.com",
+        "isDefault": false,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

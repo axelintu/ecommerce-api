@@ -1,0 +1,24 @@
+info:
+  name: New payment Elena 4
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "type": "paypal",
+        "paypalEmail": "elena.gomez.castro@paypal.com",
+        "isDefault": false,
+        "isActive": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,27 @@
+info:
+  name: ✅️ Delete paymentById
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{APIaddress}}/{{endpoint}}/:id"
+  params:
+    - name: id
+      value: 69f12434a49646b2f0cb094c
+      type: path
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
