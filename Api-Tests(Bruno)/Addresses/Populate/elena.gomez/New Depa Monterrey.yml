@@ -1,0 +1,30 @@
+info:
+  name: New Depa Monterrey
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "user": "69e9b25d4b4640ab55068ab1",
+          "alias": "Depa Monterrey",
+          "address": "Av. Eugenio Garza Sada 2501, Tecnológico",
+          "city": "Monterrey",
+          "state": "Nuevo León",
+          "postalCode": "64849",
+          "country": "México",
+          "phone": "8112345678",
+          "isDefault": true,
+          "addresType": "home"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

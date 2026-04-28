@@ -1,7 +1,7 @@
 info:
   name: Register->TurnToCustomer
   type: http
-  seq: 7
+  seq: 10
 
 http:
   method: POST
@@ -10,9 +10,9 @@ http:
     type: json
     data: |-
       {
-          "name": "Ajolote Macías",
+          "name": "Usuario Nuevecito",
           "email": "abel@fa4.com",
-          "password": "clavesimple",
+          "password": "ClaveSimpleSinComplicaciones",
           "phone": "1239072348"
       }
   auth: inherit

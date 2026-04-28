@@ -1,0 +1,30 @@
+info:
+  name: New Oficina Satélite
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "user": "69ec2d5f2b2830c129baf4f6",
+          "alias": "Oficina Satélite",
+          "address": "Av. Universidad 933, Santa Cruz Atoyac",
+          "city": "Benito Juárez",
+          "state": "Ciudad de México",
+          "postalCode": "03310",
+          "country": "México",
+          "phone": "5555553344",
+          "isDefault": false,
+          "addresType": "work"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

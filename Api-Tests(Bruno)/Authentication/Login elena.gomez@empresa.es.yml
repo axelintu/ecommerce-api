@@ -1,0 +1,32 @@
+info:
+  name: Login elena.gomez@empresa.es
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{APIaddress}}/auth/login/"
+  body:
+    type: json
+    data: |-
+      {
+          "email": "elena.gomez@empresa.es",
+          "password": "p@ssword2026"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Extract access_token from the JSON response body
+        const token = res.getBody().token;
+
+        // Save it to the active environment
+        bru.setEnvVar("JWT", token);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

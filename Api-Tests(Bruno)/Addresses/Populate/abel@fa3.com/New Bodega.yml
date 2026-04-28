@@ -1,0 +1,29 @@
+info:
+  name: New Bodega
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "alias": "Bodega",
+          "address": "Carretera a Laredo km 16.5",
+          "city": "Apodaca",
+          "state": "Nuevo León",
+          "postalCode": "66600",
+          "country": "México",
+          "phone": "8185556677",
+          "isDefault": false,
+          "addresType": "other"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

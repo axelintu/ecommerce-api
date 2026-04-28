@@ -1,0 +1,23 @@
+info:
+  name: ✅️ Delete Address
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{APIaddress}}/addresses/69f1013138042e5f1062ca6f"
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

@@ -1,0 +1,29 @@
+info:
+  name: New Casa
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "alias": "Casa",
+          "address": "Av. Paseo de la Reforma 222, Juárez",
+          "city": "Cuauhtémoc",
+          "state": "Ciudad de México",
+          "postalCode": "06600",
+          "country": "México",
+          "phone": "5551234567",
+          "isDefault": true,
+          "addresType": "home"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

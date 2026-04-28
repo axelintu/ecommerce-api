@@ -1,0 +1,29 @@
+info:
+  name: New Consultorio
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "alias": "Consultorio",
+          "address": "Calle Morelos 450, Centro",
+          "city": "Aguascalientes",
+          "state": "Aguascalientes",
+          "postalCode": "20000",
+          "country": "México",
+          "phone": "4495557788",
+          "isDefault": true,
+          "addresType": "work"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

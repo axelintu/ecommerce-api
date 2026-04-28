@@ -1,0 +1,29 @@
+info:
+  name: New Oficina
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{APIaddress}}/addresses"
+  body:
+    type: json
+    data: |2-
+        {
+          "alias": "Oficina Central",
+          "address": "Av. Mariano Otero 1249, Jardines de la Victoria",
+          "city": "Guadalajara",
+          "state": "Jalisco",
+          "postalCode": "44520",
+          "country": "México",
+          "phone": "3339876543",
+          "isDefault": false,
+          "addresType": "work"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
