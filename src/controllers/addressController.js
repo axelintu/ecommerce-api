@@ -47,13 +47,14 @@ export const createAddress = async (req, res, next) => {
 			isDefault,
 			addressType,
 		} = req.body;
-		const userId = req.user.userId;
+		const user = req.user.userId;
 
 		if (isDefault) {
 			await Address.updateMany({ user }, { isDefault: false });
 		}
 
 		const newAddress = new Address({
+			user,
 			alias,
 			address,
 			city,
@@ -132,7 +133,7 @@ export const deleteAddress = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const userId = req.body.userId;
+		const userId = req.user.userId;
 		const address = await Address.findOne({
 			_id: id,
 			user: userId

@@ -7,11 +7,6 @@ const addressIdValidation = [
 ];
 
 const createAddressValidation = [
-	body("user")
-		.notEmpty()
-		.withMessage("User is required")
-		.isMongoId()
-		.withMessage("User ID must be a valid MongoDB ObjectId"),
 	body("alias")
 		.notEmpty()
 		.withMessage("Address is required")
