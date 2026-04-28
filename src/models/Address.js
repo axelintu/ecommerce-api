@@ -6,7 +6,7 @@ const addressSchema = new mongoose.Schema({
 		ref: "User",
 		required: true
 	},
-	name: {
+	alias: {
 		type: String,
 		required: true,
 		trim: true

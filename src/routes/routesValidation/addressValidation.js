@@ -12,7 +12,7 @@ const createAddressValidation = [
 		.withMessage("User is required")
 		.isMongoId()
 		.withMessage("User ID must be a valid MongoDB ObjectId"),
-	body("name")
+	body("alias")
 		.notEmpty()
 		.withMessage("Address is required")
 		.trim(),
@@ -58,7 +58,7 @@ const updateAddressValidation = [
 	param("id")
 		.isMongoId()
 		.withMessage("Address ID must be a valid MongoDB ObjectId"),
-	body("name")
+	body("alias")
 		.notEmpty()
 		.withMessage("Address is required")
 		.trim(),

@@ -37,7 +37,7 @@ export const createAddress = async (req, res, next) => {
 	*/
 	try {
 		const {
-			name,
+			alias,
 			address,
 			city,
 			state,
@@ -54,7 +54,7 @@ export const createAddress = async (req, res, next) => {
 		}
 
 		const newAddress = new Address({
-			name,
+			alias,
 			address,
 			city,
 			state,
@@ -77,7 +77,7 @@ export const updateAddress = async (req, res, next) => {
 	try {
 		const addressId = req.params.id;
 		const {
-			name,
+			alias,
 			address,
 			city,
 			state,
@@ -108,7 +108,7 @@ export const updateAddress = async (req, res, next) => {
 			);
 		}
 
-		shipAddress.name = name;
+		shipAddress.alias = alias;
 		shipAddress.address = address;
 		shipAddress.city = city;
 		shipAddress.state = state;
