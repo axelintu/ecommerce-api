@@ -40,7 +40,10 @@ const createUser = async (req, res, next) => {
 		);
 		const userResponse = newUser.toObject();
 		delete userResponse.password;
-		res.status(201).json(userResponse);
+		res.status(201).json({
+			_id: newUser._id,
+			...userResponse,
+		});
 	}
 	catch (error) { next(error); }
 };
@@ -48,8 +51,11 @@ const createUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const { name, email, role, password } = req.body;
-		const hashPassword = await generatePassword(password);
+		const { name, email, role, phone, password } = req.body;
+		const updateData = { name, email, phone, role };
+		if (password) {
+			updateData.password = await generatePassword(password);
+		}
 		const updatedUser = await User.findByIdAndUpdate(
 			id,
 			{ name, email, password: hashPassword, role },
