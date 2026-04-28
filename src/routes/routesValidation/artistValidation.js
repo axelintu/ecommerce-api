@@ -6,27 +6,32 @@ const artistIdValidation = [
 ];
 
 const createArtistValidation = [
-	body("name").notEmpty().withMessage("Name is required"),
+	body("urlName").notEmpty().withMessage("urlName is required"),
+	body("name").notEmpty().withMessage("Name is required")
+	,
 	body("description").notEmpty().withMessage("Description is required"),
-	body("parentArtist")
-		.optional()
-		.isMongoId()
-		.withMessage("Parent artist must be a valid MongoDB ObjectId"),
+	body("imageUrl").notEmpty().withMessage("imageUrl is required"),
+	body("backgroundImageUrl").notEmpty().withMessage("backgroundImageUrl is required")
 ];
 
 const updateArtistValidation = [
 	param("id")
 		.isMongoId()
 		.withMessage("Artist ID must be a valid MongoDB ObjectId"),
+	body("urlName").optional().notEmpty().withMessage("urlName cannot be empty"),
 	body("name").optional().notEmpty().withMessage("Name cannot be empty"),
 	body("description")
 		.optional()
 		.notEmpty()
 		.withMessage("Description cannot be empty"),
-	body("parentArtist")
+	body("imageUrl")
 		.optional()
-		.isMongoId()
-		.withMessage("Parent artist must be a valid MongoDB ObjectId"),
+		.notEmpty()
+		.withMessage("Description cannot be empty"),
+	body("backgroundImageUrl")
+		.optional()
+		.notEmpty()
+		.withMessage("Description cannot be empty")
 ];
 export {
 	artistIdValidation,
