@@ -10,7 +10,6 @@ http:
     type: json
     data: |2-
         {
-          "user": "69ec2d5f2b2830c129baf4f6",
           "alias": "Estudio / Taller",
           "address": "Calle 60 x 57, Centro",
           "city": "Mérida",

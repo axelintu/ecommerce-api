@@ -1,0 +1,48 @@
+info:
+  name: ✅️ New User Juan
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{APIaddress}}/users"
+  body:
+    type: json
+    data: |-
+      {
+      "name": "Juan Perez Soto",
+          "email": "juan.perez@fastmail.com",
+          "password": "coca_con_Pan",
+          "phone": "677998877"
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Registers a new user account.
+
+  Request body:
+
+  - `name` (string): Full name of the user
+      
+  - `email` (string): User email address
+      
+  - `password` (string): User password
+      
+  - `phone` (string): User phone number
+      
+
+  Example request:
+
+  \`\`\`json  
+  {  
+  "name": "Alejandro Flores Prieto",  
+  "email": "[alejandro@floresprieto2.com](https://mailto:alejandro@floresprieto2.com)",  
+  "password": "clavesimple",  
+  "phone": "1239072348"  
+  }

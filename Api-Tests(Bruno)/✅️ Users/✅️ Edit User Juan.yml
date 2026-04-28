@@ -1,0 +1,49 @@
+info:
+  name: ✅️ Edit User Juan
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/users/:id"
+  params:
+    - name: id
+      value: 69f10fbf4f8a3a26538dfedb
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+      "name": "Juan Perez AguayO"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Registers a new user account.
+
+  Request body:
+
+  - `name` (string): Full name of the user
+      
+  - `email` (string): User email address
+      
+  - `password` (string): User password
+      
+  - `phone` (string): User phone number
+      
+
+  Example request:
+
+  \`\`\`json  
+  {  
+  "name": "Alejandro Flores Prieto",  
+  "email": "[alejandro@floresprieto2.com](https://mailto:alejandro@floresprieto2.com)",  
+  "password": "clavesimple",  
+  "phone": "1239072348"  
+  }

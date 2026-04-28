@@ -34,12 +34,13 @@ const createUser = async (req, res, next) => {
 	/*  #swagger.tags = ['Users']
 	*/
 	try {
-		const { name, email, password, role } = req.body;
+		const { name, email, password, phone, role } = req.body;
 		const hashPassword = await generatePassword(password);
 		const newUser = await User.create(
 			{
 				name,
 				email,
+				phone,
 				password: hashPassword,
 				role
 			}
