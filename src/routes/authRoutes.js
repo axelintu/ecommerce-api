@@ -20,12 +20,16 @@ const loginValidation = [
 ];
 
 router.post(
+	/*  #swagger.tags = ['Authentication']
+	*/
 	"/register",
 	registerValidation,
 	validate,
 	register
 );
 router.post(
+	/*  #swagger.tags = ['Authentication']
+	*/
 	"/login",
 	loginValidation,
 	validate,

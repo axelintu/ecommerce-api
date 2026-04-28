@@ -1,6 +1,8 @@
 import Address from "../models/Address.js";
 
 export const getUserAddresses = async (req, res, next) => {
+	/*  #swagger.tags = ['Addresses']
+	*/
 	try {
 		const userId = req.user.userId;
 
@@ -15,6 +17,8 @@ export const getUserAddresses = async (req, res, next) => {
 };
 
 export const getAddressById = async (req, res, next) => {
+	/*  #swagger.tags = ['Addresses']
+	*/
 	try {
 		const { id } = req.params;
 		const userId = req.user.userId;
@@ -29,6 +33,8 @@ export const getAddressById = async (req, res, next) => {
 	}
 };
 export const createAddress = async (req, res, next) => {
+	/*  #swagger.tags = ['Addresses']
+	*/
 	try {
 		const {
 			name,
@@ -66,6 +72,8 @@ export const createAddress = async (req, res, next) => {
 	}
 };
 export const updateAddress = async (req, res, next) => {
+	/*  #swagger.tags = ['Addresses']
+	*/
 	try {
 		const addressId = req.params.id;
 		const {
@@ -120,6 +128,8 @@ export const updateAddress = async (req, res, next) => {
 };
 
 export const deleteAddress = async (req, res, next) => {
+	/*  #swagger.tags = ['Addresses']
+	*/
 	try {
 		const { id } = req.params;
 		const userId = req.body.userId;

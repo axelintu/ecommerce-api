@@ -1,6 +1,8 @@
 import Category from "../models/Category.js";
 
 export const getCategories = async (req, res, next) => {
+	/*  #swagger.tags = ['Categories']
+	*/
 	try {
 		const categories = await Category.find().populate("parentCategory");
 		res.status(200).json(categories)
@@ -9,6 +11,8 @@ export const getCategories = async (req, res, next) => {
 };
 
 export const getCategoryById = async (req, res, next) => {
+	/*  #swagger.tags = ['Categories']
+	*/
 	try {
 		const { id } = req.params;
 		const category = await Category.findById(id).populate("parentCategory");
@@ -21,6 +25,8 @@ export const getCategoryById = async (req, res, next) => {
 };
 
 export const createCategory = async (req, res, next) => {
+	/*  #swagger.tags = ['Categories']
+	*/
 	try {
 		const {
 			urlName,
@@ -45,6 +51,8 @@ export const createCategory = async (req, res, next) => {
 };
 
 export const updateCategory = async (req, res, next) => {
+	/*  #swagger.tags = ['Categories']
+	*/
 	try {
 		const { id } = req.params;
 		const {
@@ -76,6 +84,8 @@ export const updateCategory = async (req, res, next) => {
 };
 
 export const deleteCategory = async (req, res, next) => {
+	/*  #swagger.tags = ['Categories']
+	*/
 	try {
 		const { id } = req.params;
 		const category = await Category.findOne(id);

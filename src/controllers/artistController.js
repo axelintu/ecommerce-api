@@ -1,6 +1,8 @@
 import Artist from "../models/Artist.js";
 
 export const getArtists = async (req, res, next) => {
+	/*  #swagger.tags = ['Artists']
+	*/
 	try {
 		const artists = await Artist.find();
 		res.status(200).json(artists)
@@ -10,6 +12,8 @@ export const getArtists = async (req, res, next) => {
 };
 
 export const getArtistById = async (req, res, next) => {
+	/*  #swagger.tags = ['Artists']
+	*/
 	try {
 		const { id } = req.params;
 		const artist = await Artist.findById(id);
@@ -21,7 +25,10 @@ export const getArtistById = async (req, res, next) => {
 		next(error);
 	}
 };
+
 export const createArtist = async (req, res, next) => {
+	/*  #swagger.tags = ['Artists']
+	*/
 	try {
 		const {
 			urlName,
@@ -44,6 +51,8 @@ export const createArtist = async (req, res, next) => {
 	}
 };
 export const updateArtist = async (req, res, next) => {
+	/*  #swagger.tags = ['Artists']
+	*/
 	try {
 		const { id } = req.params;
 		const {
@@ -73,6 +82,8 @@ export const updateArtist = async (req, res, next) => {
 	}
 };
 export const deleteArtist = async (req, res, next) => {
+	/*  #swagger.tags = ['Artists']
+	*/
 	try {
 		const { id } = req.params;
 		const artist = await Artist.findByIdAndDelete(id);

@@ -6,8 +6,18 @@ import logger from "./src/middleware/logger.js";
 import routes from "./src/routes/index.js";
 dotenv.config();
 
+import swaggerUi from 'swagger-ui-express';
+import { readFile } from 'fs/promises';
+
+// Read the generated JSON file
+const swaggerFile = JSON.parse(
+	await readFile(new URL('./swagger-output.json', import.meta.url))
+);
+
 const app = e();
 const port = process.env.PORT;
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(e.json());
 app.use(logger);
@@ -15,7 +25,7 @@ app.use(logger);
 connectDB();
 
 app.get("/api", (req, res) => {
-	res.send("API Ecommerce con MongoDB");
+	res.send("API Ecommerce con MongoDB. \n Documentation available at /api-docs");
 });
 
 app.use("/api", routes);

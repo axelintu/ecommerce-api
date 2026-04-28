@@ -1,6 +1,8 @@
 import Product from "../models/Product.js";
 
 export const getProducts = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const products = await Product.find()
 			.populate("category")
@@ -11,6 +13,8 @@ export const getProducts = async (req, res, next) => {
 };
 
 export const getProductById = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const { id } = req.params;
 		const product = await Product.findById(id)
@@ -25,6 +29,8 @@ export const getProductById = async (req, res, next) => {
 };
 
 export const createProduct = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const {
 			name,
@@ -54,6 +60,8 @@ export const createProduct = async (req, res, next) => {
 };
 
 export const updateProduct = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const { id } = req.params;
 		const {
@@ -75,6 +83,8 @@ export const updateProduct = async (req, res, next) => {
 	catch (error) { next(error); }
 };
 export const deleteProduct = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const { id } = req.params;
 		const productToDelete = await Product.findOne(id);
@@ -90,6 +100,8 @@ export const deleteProduct = async (req, res, next) => {
 
 // api/products/search?q=iPhone&category=Apple&artist=Babymetal&minPrice=5000&maxPrice=20000&inStock=true&sort=name&order=asc&page=2&limit=5
 export const searchProducts = async (req, res, next) => {
+	/*  #swagger.tags = ['Products']
+	*/
 	try {
 		const {
 			q,

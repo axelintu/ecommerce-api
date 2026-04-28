@@ -1,6 +1,8 @@
 import PaymentMethod from "../models/PaymentMethod.js";
 
 export const getPaymentMethods = async (req, res, next) => {
+	/*  #swagger.tags = ['PaymentMethods']
+	*/
 	try {
 		const paymentMethods = await PaymentMethod.find()
 			.populate("user");
@@ -10,6 +12,8 @@ export const getPaymentMethods = async (req, res, next) => {
 };
 
 export const getPaymentMethodById = async (req, res, next) => {
+	/*  #swagger.tags = ['PaymentMethods']
+	*/
 	try {
 		const { id } = req.params;
 		const paymentMethod = await PaymentMethod.findById(id)
@@ -25,6 +29,8 @@ export const getPaymentMethodById = async (req, res, next) => {
 };
 
 export const createPaymentMethod = async (req, res, next) => {
+	/*  #swagger.tags = ['PaymentMethods']
+	*/
 	try {
 		const {
 			user,
@@ -62,6 +68,8 @@ export const createPaymentMethod = async (req, res, next) => {
 };
 
 export const updatePaymentMethod = async (req, res, next) => {
+	/*  #swagger.tags = ['PaymentMethods']
+	*/
 	try {
 		const { id } = req.params;
 		const {
@@ -106,6 +114,8 @@ export const updatePaymentMethod = async (req, res, next) => {
 };
 
 export const deletePaymentMethod = async (req, res, next) => {
+	/*  #swagger.tags = ['PaymentMethods']
+	*/
 	try {
 		const { id } = req.params;
 		const paymentMethodToDelete = await PaymentMethod.findOne(id);

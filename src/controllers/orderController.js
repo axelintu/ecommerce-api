@@ -1,6 +1,8 @@
 import Order from "../models/Order.js";
 
 export const getOrders = async (req, res, next) => {
+	/*  #swagger.tags = ['Orders']
+	*/
 	try {
 		const orders = await Order.find()
 			.populate("user")
@@ -13,6 +15,8 @@ export const getOrders = async (req, res, next) => {
 };
 
 export const getOrderById = async (req, res, next) => {
+	/*  #swagger.tags = ['Orders']
+	*/
 	try {
 		const { id } = req.params;
 		const order = await Order.findById(id)
@@ -30,6 +34,8 @@ export const getOrderById = async (req, res, next) => {
 };
 
 export const createOrder = async (req, res, next) => {
+	/*  #swagger.tags = ['Orders']
+	*/
 	try {
 		const {
 			user,
@@ -56,6 +62,8 @@ export const createOrder = async (req, res, next) => {
 	catch (error) { next(error); }
 };
 export const updateOrderStatus = async (req, res, next) => {
+	/*  #swagger.tags = ['Orders']
+	*/
 	try {
 		const { id } = req.params;
 		const { status, paymentStatus } = req.body;

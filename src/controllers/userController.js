@@ -7,6 +7,8 @@ const generatePassword = async (pass) => {
 };
 
 const getUsers = async (req, res, next) => {
+	/*  #swagger.tags = ['Users']
+	*/
 	try {
 		const users = await User.find().select("-password");
 		res.status(200).json(users);
@@ -15,6 +17,8 @@ const getUsers = async (req, res, next) => {
 };
 
 const getUserById = async (req, res, next) => {
+	/*  #swagger.tags = ['Users']
+	*/
 	try {
 		const { id } = req.params;
 		const user = await User.findById(id).select("-password");
@@ -27,6 +31,8 @@ const getUserById = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
+	/*  #swagger.tags = ['Users']
+	*/
 	try {
 		const { name, email, password, role } = req.body;
 		const hashPassword = await generatePassword(password);
@@ -49,6 +55,8 @@ const createUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
+	/*  #swagger.tags = ['Users']
+	*/
 	try {
 		const { id } = req.params;
 		const { name, email, role, phone, password } = req.body;
@@ -70,6 +78,8 @@ const updateUser = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
+	/*  #swagger.tags = ['Users']
+	*/
 	try {
 		const { id } = req.params;
 		const user = await User.findByIdAndDelete(id);

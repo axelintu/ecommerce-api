@@ -19,6 +19,9 @@ import {
 const router = express.Router();
 
 router.get(
+	/**
+	 * #swagger.tags = ['Wishlist']
+	 */
 	"/",
 	authMiddleware,
 	isAdmin,
@@ -26,6 +29,9 @@ router.get(
 );
 
 router.get(
+	/**
+	 * #swagger.tags = ['Wishlist']
+	 */
 	"/user/:userId",
 	authMiddleware,
 	userIdValidation,
@@ -34,6 +40,9 @@ router.get(
 );
 
 router.post(
+	/**
+ * #swagger.tags = ['Wishlist']
+ */
 	"/",
 	authMiddleware,
 	addProductValidation,
@@ -42,6 +51,9 @@ router.post(
 );
 
 router.delete(
+	/**
+	 * #swagger.tags = ['Wishlist']
+	 */
 	"/:id/product",
 	authMiddleware,
 	removeProductValidation,
@@ -50,6 +62,9 @@ router.delete(
 );
 
 router.delete(
+	/**
+	 * #swagger.tags = ['Wishlist']
+	 */
 	"/:id",
 	authMiddleware,
 	wishlistIdValidation,

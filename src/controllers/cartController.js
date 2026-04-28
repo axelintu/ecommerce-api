@@ -1,6 +1,8 @@
 import Cart from "../models/Cart.js";
 
 export const getCarts = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const carts = await Cart.find()
 			.populate("user")
@@ -11,6 +13,8 @@ export const getCarts = async (req, res, next) => {
 };
 
 export const getCartById = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const { id } = req.params;
 		const cart = await Cart.findById(id);
@@ -24,6 +28,8 @@ export const getCartById = async (req, res, next) => {
 };
 
 export const getCartByUser = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const userId = req.params.userId;
 		const cart = await Cart.findOne({ user: userId })
@@ -59,6 +65,8 @@ const validateProducts = (res, user, products) => {
 }
 
 export const createCart = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const { user, products } = req.body;
 
@@ -76,6 +84,8 @@ export const createCart = async (req, res, next) => {
 };
 
 export const updateCart = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const { id } = req.params;
 		const { userId, products } = req.body;
@@ -98,6 +108,8 @@ export const updateCart = async (req, res, next) => {
 };
 
 export const addProductToCart = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const { userId, productId, quantity = 1 } = req.body;
 		const cart = await Cart.findOne({ user: userId });
@@ -129,6 +141,8 @@ export const addProductToCart = async (req, res, next) => {
 
 
 export const deleteCart = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
 	try {
 		const { id } = req.params;
 		const cartToDelete = await Cart.findOne({ _id: id });
