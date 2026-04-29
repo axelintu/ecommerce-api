@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{APIaddress}}/artists"
+  url: "{{APIaddress}}/{{endpoint}}"
   body:
     type: json
     data: |2-
@@ -14,7 +14,7 @@ http:
             "name": "Ropa Exclusiva/Merch Oficial",
             "description": "Camisetas, sudaderas y prendas de ropa oficial de tus bandas y artistas favoritos. Llevá el estilo de tu artista a todos lados.",
             "imageURL": "https://placehold.co/800x600.png",
-            "parentCategory": "{{cat_merch-oficial}}"
+            "parentCategory": "{{cat_merchoficial}}"
           }
   auth: inherit
 
@@ -22,17 +22,8 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        const data = res.getBody();
-        console.log(data);
-
-        // Safety check: Ensure data exists and is an object
-        if (data && typeof data === 'object') {
-          const {_id} = data;
-
-          bru.setVar("cat_apparel", _id);
-        } else {
-          console.error("No data received in response body");
-        }
+        const id = res.getBody()._id;
+        bru.setEnvVar("cat_apparel", id);
 
 settings:
   encodeUrl: true

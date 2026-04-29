@@ -1,11 +1,11 @@
 info:
-  name: Edit Category (Photobooks)
+  name: Edit Category
   type: http
   seq: 4
 
 http:
   method: PUT
-  url: "{{APIaddress}}/{{endpoint}}/{{photobooks}}"
+  url: "{{APIaddress}}/{{endpoint}}/{{cat_photobooks}}"
   body:
     type: json
     data: |2-

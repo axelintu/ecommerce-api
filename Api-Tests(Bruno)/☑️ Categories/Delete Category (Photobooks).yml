@@ -1,22 +1,20 @@
 info:
-  name: Delete Category (Photobooks)
+  name: Delete Category
   type: http
   seq: 6
 
 http:
   method: DELETE
-  url: "{{APIaddress}}/{{endpoint}}/{{photobooks}}"
+  url: "{{APIaddress}}/{{endpoint}}/{{toDelete}}"
   body:
     type: json
-    data: |2-
-        {
-          "urlName": "photobooks",
-          "name": "Photobooks y Revistas",
-          "description": "Libros de fotografías oficiales, revistas y programas de conciertos. Captura los mejores momentos y visuales de la carrera de tus artistas.",
-          "imageURL": "https://placehold.co/800x600.png",
-          "parentCategory": null
-        }
+    data: ""
   auth: inherit
+
+runtime:
+  variables:
+    - name: toDelete
+      value: 69f26899d075c554c978fdb4
 
 settings:
   encodeUrl: true

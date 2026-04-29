@@ -47,7 +47,15 @@ export const createCategory = async (req, res, next) => {
 		await newCategory.populate("parentCategory");
 		res.status(201).json(newCategory);
 	}
-	catch (error) { next(error); }
+	catch (error) {
+		if (error.code === 11000) {
+			const field = Object.keys(error.keyPattern)[0];
+			return res.status(409).json({ 
+				message: `A category with this ${field} already exists` 
+			});
+		}
+		next(error);
+	}
 };
 
 export const updateCategory = async (req, res, next) => {
@@ -80,7 +88,15 @@ export const updateCategory = async (req, res, next) => {
 		}
 		res.status(200).json(updatedCategory);
 	}
-	catch (error) { next(error); }
+	catch (error) {
+		if (error.code === 11000) {
+			const field = Object.keys(error.keyPattern)[0];
+			return res.status(409).json({ 
+				message: `A category with this ${field} already exists` 
+			});
+		}
+		next(error);
+	}
 };
 
 export const deleteCategory = async (req, res, next) => {
@@ -88,7 +104,7 @@ export const deleteCategory = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const category = await Category.findOne(id);
+		const category = await Category.findOne({_id: id});
 		if (!category) {
 			return res.status(404).json({ message: "Category not found" });
 		}

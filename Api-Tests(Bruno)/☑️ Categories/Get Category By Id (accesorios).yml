@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{APIaddress}}/{{endpoint}}/{{accesorios}}"
+  url: "{{APIaddress}}/{{endpoint}}/69f25e5264142d790c86f6a4"
   body:
     type: json
     data: ""

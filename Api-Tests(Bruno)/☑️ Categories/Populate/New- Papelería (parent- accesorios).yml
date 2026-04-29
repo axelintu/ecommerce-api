@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{APIaddress}}/artists"
+  url: "{{APIaddress}}/{{endpoint}}"
   body:
     type: json
     data: |-
@@ -14,7 +14,7 @@ http:
         "name": "Vinilos / LP",
         "description": "Ediciones especiales en vinilo para los amantes del sonido analógico. Una pieza de colección imprescindible para cualquier audiófilo.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": "{{cat_accesorios}}"
+        "parentCategory": "{{cat_accessories}}"
       }
   auth: inherit
 
@@ -22,17 +22,8 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        const data = res.getBody();
-        console.log(data);
-
-        // Safety check: Ensure data exists and is an object
-        if (data && typeof data === 'object') {
-          const {_id} = data;
-
-          bru.setVar("cat_stationery", _id);
-        } else {
-          console.error("No data received in response body");
-        }
+        const id = res.getBody()._id;
+        bru.setEnvVar("cat_stationery", id);
 
 settings:
   encodeUrl: true

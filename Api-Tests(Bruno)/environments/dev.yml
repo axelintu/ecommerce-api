@@ -25,21 +25,23 @@ variables:
     value: ""
   - name: artist_haku
     value: ""
-  - name: cat_merch-oficial
-    value: ""
   - name: cat_accessories
-    value: ""
-  - name: cat_cd-dvd-bluray
-    value: ""
-  - name: cat_tour-merch
-    value: ""
+    value: 69f26889d075c554c978fdb2
+  - name: cat_tourmerch
+    value: 69f2679ed075c554c978fd9e
   - name: cat_apparel
-    value: ""
-  - name: cat_tote-bags
-    value: ""
+    value: 69f267a4d075c554c978fda1
   - name: cat_keychains
-    value: ""
-  - name: cat_acrylic-stands
-    value: ""
+    value: 69f26b33d075c554c978fdc1
+  - name: cat_acrylicstands
+    value: 69f26b38d075c554c978fdc4
   - name: cat_stationery
-    value: ""
+    value: 69f26b3dd075c554c978fdc7
+  - name: cat_photobooks
+    value: 69f26b49d075c554c978fdca
+  - name: cat_merchoficial
+    value: 69f2651cd075c554c978fd7e
+  - name: cat_cddvdbluray
+    value: 69f265add075c554c978fd8e
+  - name: cat_totebags
+    value: 69f26b26d075c554c978fdbe

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{APIaddress}}/artists"
+  url: "{{APIaddress}}/{{endpoint}}"
   body:
     type: json
     data: |-
@@ -14,7 +14,7 @@ http:
         "name": "Figuras de Acrílico",
         "description": "Figuras coleccionables de acrílico de alta calidad. Ideales para decorar tu escritorio o estantería con las siluetas de tus artistas favoritos.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": "{{cat_accesorios}}"
+        "parentCategory": "{{cat_accessories}}"
       }
   auth: inherit
 
@@ -22,17 +22,8 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        const data = res.getBody();
-        console.log(data);
-
-        // Safety check: Ensure data exists and is an object
-        if (data && typeof data === 'object') {
-          const {_id} = data;
-
-          bru.setVar("cat_acrylic-stands", _id);
-        } else {
-          console.error("No data received in response body");
-        }
+        const id = res.getBody()._id;
+        bru.setEnvVar("cat_acrylicstands", id);
 
 settings:
   encodeUrl: true

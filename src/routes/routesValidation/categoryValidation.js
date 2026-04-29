@@ -9,7 +9,7 @@ const createCategoryValidation = [
 	body("name").notEmpty().withMessage("Name is required"),
 	body("description").notEmpty().withMessage("Description is required"),
 	body("parentCategory")
-		.optional()
+		.optional({ checkFalsy: true })
 		.isMongoId()
 		.withMessage("Parent category must be a valid MongoDB ObjectId"),
 ];
@@ -24,7 +24,7 @@ const updateCategoryValidation = [
 		.notEmpty()
 		.withMessage("Description cannot be empty"),
 	body("parentCategory")
-		.optional()
+		.optional({ checkFalsy: true })
 		.isMongoId()
 		.withMessage("Parent category must be a valid MongoDB ObjectId"),
 ];
