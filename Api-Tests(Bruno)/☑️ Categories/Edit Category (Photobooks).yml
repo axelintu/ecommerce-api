@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{APIaddress}}/artists{{photobooks}}"
+  url: "{{APIaddress}}/{{endpoint}}/{{photobooks}}"
   body:
     type: json
     data: |2-

@@ -14,7 +14,7 @@ http:
         "name": "Tour Merch",
         "description": "Merch exclusiva vendida en los tours de tus artistas favoritos. Encuentra abanicos, medallas y accesorios limitados de tus giras favoritas.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": {{merch-oficial}}
+        "parentCategory": "{{cat_merch-oficial}}"
       }
   auth: inherit
 

@@ -14,7 +14,7 @@ http:
     type: json
     data: |-
       {
-        "cardHolderName": "Ajolote Macías Sr.",
+        "cardHolderName": "Ajolote Macías El senior",
         "isDefault": true
       }
   auth: inherit

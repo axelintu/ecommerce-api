@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: "{{APIaddress}}/artists{{photobooks}}"
+  url: "{{APIaddress}}/{{endpoint}}/{{photobooks}}"
   body:
     type: json
     data: |2-

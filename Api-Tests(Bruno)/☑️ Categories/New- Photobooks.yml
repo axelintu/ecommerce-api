@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{APIaddress}}/artists"
+  url: "{{APIaddress}}/{{endpoint}}"
   body:
     type: json
     data: |2-

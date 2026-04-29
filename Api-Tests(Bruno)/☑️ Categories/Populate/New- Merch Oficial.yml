@@ -27,9 +27,8 @@ runtime:
 
         // Safety check: Ensure data exists and is an object
         if (data && typeof data === 'object') {
-          const {_id} = data;
-
-          bru.setVar("merch-oficial", _id);
+          const id = data.id;
+          bru.setEnvVar("cat_merch-oficial", id);
         } else {
           console.error("No data received in response body");
         }

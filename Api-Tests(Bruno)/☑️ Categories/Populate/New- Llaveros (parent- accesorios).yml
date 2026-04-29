@@ -14,7 +14,7 @@ http:
         "name": "Llaveros",
         "description": "Pequeños accesorios decorativos para llevar contigo. Desde llaveros de peluche hasta diseños exclusivos de tus artistas.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": {{accesorios}}
+        "parentCategory": "{{cat_accesorios}}"
       }
   auth: inherit
 
@@ -29,7 +29,7 @@ runtime:
         if (data && typeof data === 'object') {
           const {_id} = data;
 
-          bru.setVar("keychains", _id);
+          bru.setVar("cat_keychains", _id);
         } else {
           console.error("No data received in response body");
         }

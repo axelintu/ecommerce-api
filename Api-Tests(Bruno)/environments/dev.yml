@@ -10,7 +10,7 @@ variables:
   - name: artist_MRSGREENAPPLE
     value: 69f042fac4fdca569efc8a5e
   - name: artist_yorushika
-    value: ""
+    value: 69f03d3bc4fdca569efc8a43
   - name: artist_BANDMAID
     value: ""
   - name: artist_riho-sayashi
@@ -24,4 +24,22 @@ variables:
   - name: artist_hanabie
     value: ""
   - name: artist_haku
+    value: ""
+  - name: cat_merch-oficial
+    value: ""
+  - name: cat_accessories
+    value: ""
+  - name: cat_cd-dvd-bluray
+    value: ""
+  - name: cat_tour-merch
+    value: ""
+  - name: cat_apparel
+    value: ""
+  - name: cat_tote-bags
+    value: ""
+  - name: cat_keychains
+    value: ""
+  - name: cat_acrylic-stands
+    value: ""
+  - name: cat_stationery
     value: ""

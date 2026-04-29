@@ -10,11 +10,11 @@ http:
     type: json
     data: |-
       {
-        "urlName": "vinyl",
+        "urlName": "stationery",
         "name": "Vinilos / LP",
         "description": "Ediciones especiales en vinilo para los amantes del sonido analógico. Una pieza de colección imprescindible para cualquier audiófilo.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": {{cd-dvd-bluray}}
+        "parentCategory": "{{cat_accesorios}}"
       }
   auth: inherit
 
@@ -29,7 +29,7 @@ runtime:
         if (data && typeof data === 'object') {
           const {_id} = data;
 
-          bru.setVar("cd-dvd-bluray", _id);
+          bru.setVar("cat_stationery", _id);
         } else {
           console.error("No data received in response body");
         }

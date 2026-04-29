@@ -14,7 +14,7 @@ http:
         "name": "Figuras de Acrílico",
         "description": "Figuras coleccionables de acrílico de alta calidad. Ideales para decorar tu escritorio o estantería con las siluetas de tus artistas favoritos.",
         "imageURL": "https://placehold.co/800x600.png",
-        "parentCategory": {{accesorios}}
+        "parentCategory": "{{cat_accesorios}}"
       }
   auth: inherit
 
@@ -29,7 +29,7 @@ runtime:
         if (data && typeof data === 'object') {
           const {_id} = data;
 
-          bru.setVar("acrylic-stands", _id);
+          bru.setVar("cat_acrylic-stands", _id);
         } else {
           console.error("No data received in response body");
         }

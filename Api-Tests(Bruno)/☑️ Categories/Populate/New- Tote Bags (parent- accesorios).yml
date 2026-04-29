@@ -14,7 +14,7 @@ http:
           "name": "Tote Bags",
           "description": "Bolsos de tela versátiles y funcionales con diseños exclusivos de tus artistas favoritos. Perfectos para llevar contigo a cualquier lugar.",
           "imageURL": "https://placehold.co/800x600.png",
-            "parentCategory": {{accesorios}}
+            "parentCategory": "{{cat_accesorios}}"
           }
   auth: inherit
 
@@ -29,7 +29,7 @@ runtime:
         if (data && typeof data === 'object') {
           const {_id} = data;
 
-          bru.setVar("tote-bags", _id);
+          bru.setVar("cat_tote-bags", _id);
         } else {
           console.error("No data received in response body");
         }

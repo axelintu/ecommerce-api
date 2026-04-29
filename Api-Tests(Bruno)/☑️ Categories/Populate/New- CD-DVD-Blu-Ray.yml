@@ -29,7 +29,7 @@ runtime:
         if (data && typeof data === 'object') {
           const {_id} = data;
 
-          bru.setVar("cd-dvd-bluray", _id);
+          bru.setVar("cat_cd-dvd-bluray", _id);
         } else {
           console.error("No data received in response body");
         }
