@@ -1,6 +1,6 @@
 import PaymentMethod from "../models/PaymentMethod.js";
 
-export const getPaymentMethods = async (req, res, next) => {
+export const getUserPaymentMethods = async (req, res, next) => {
 	/*  #swagger.tags = ['PaymentMethods']
 	*/
 	try {

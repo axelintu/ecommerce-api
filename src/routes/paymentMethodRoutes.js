@@ -1,6 +1,6 @@
 import express from "express";
 import {
-	getPaymentMethods,
+	getUserPaymentMethods,
 	getPaymentMethodById,
 	createPaymentMethod,
 	updatePaymentMethod,
@@ -9,7 +9,9 @@ import {
 import validate from "../middleware/validation.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/isAdminMiddleware.js";
-import checkPaymentOwnershipById from "../middleware/checkPaymentOwnership.js";
+import checkOwnership from "../middleware/checkOwnershipById.js";
+import PaymentMethod from "../models/PaymentMethod.js";
+const checkPMOwnership = checkOwnership(PaymentMethod, "Payment method");
 import {
 	paymentIdValidation,
 	createPaymentValidation,
@@ -21,7 +23,7 @@ const router = express.Router();
 router.get(
 	"/",
 	authMiddleware,
-	getPaymentMethods
+	getUserPaymentMethods
 );
 
 router.get(
@@ -29,7 +31,7 @@ router.get(
 	authMiddleware,
 	paymentIdValidation,
 	validate,
-	checkPaymentOwnershipById,
+	checkPMOwnership,
 	getPaymentMethodById,
 );
 
@@ -46,6 +48,7 @@ router.put(
 	authMiddleware,
 	updatePaymentValidation,
 	validate,
+	checkPMOwnership,
 	updatePaymentMethod,
 );
 
@@ -54,6 +57,7 @@ router.delete(
 	authMiddleware,
 	paymentIdValidation,
 	validate,
+	checkPMOwnership,
 	deletePaymentMethod,
 );
 

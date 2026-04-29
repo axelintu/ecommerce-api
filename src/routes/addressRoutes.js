@@ -9,7 +9,9 @@ import {
 import validate from "../middleware/validation.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/isAdminMiddleware.js";
-import checkAddressOwnershipById from "../middleware/checkAddressOwnership.js";
+import checkOwnership from "../middleware/checkOwnershipById.js";
+import Address from "../models/Address.js";
+const checkAddressOwnership = checkOwnership(Address, "Address");
 import {
 	addressIdValidation,
 	createAddressValidation,
@@ -29,7 +31,7 @@ router.get(
 	authMiddleware,
 	addressIdValidation,
 	validate,
-	checkAddressOwnershipById,
+	checkAddressOwnership,
 	getAddressById
 );
 
@@ -46,7 +48,7 @@ router.put(
 	authMiddleware,
 	updateAddressValidation,
 	validate,
-	checkAddressOwnershipById,
+	checkAddressOwnership,
 	updateAddress,
 );
 
@@ -55,7 +57,7 @@ router.delete(
 	addressIdValidation,
 	authMiddleware,
 	validate,
-	checkAddressOwnershipById,
+	checkAddressOwnership,
 	deleteAddress,
 );
 
