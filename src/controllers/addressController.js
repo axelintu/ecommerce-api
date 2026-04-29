@@ -38,7 +38,7 @@ export const getAddressById = async (req, res, next) => {
 		retAdd.country     = address.country;
 		retAdd.phone       = address.phone;
 		retAdd.isDefault   = address.isDefault;
-		retAdd.addresType = address.addresType;
+		retAdd.addressType = address.addressType;
 		res.status(200).json(retAdd);
 	} catch (error) {
 		next(error);

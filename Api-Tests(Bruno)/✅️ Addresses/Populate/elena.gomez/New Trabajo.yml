@@ -19,7 +19,7 @@ http:
           "country": "México",
           "phone": "4425550102",
           "isDefault": false,
-          "addresType": "work"
+          "addressType": "work"
         }
   auth: inherit
 

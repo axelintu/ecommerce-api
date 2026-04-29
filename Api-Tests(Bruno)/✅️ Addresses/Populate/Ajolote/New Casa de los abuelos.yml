@@ -18,7 +18,7 @@ http:
           "country": "México",
           "phone": "2225551122",
           "isDefault": false,
-          "addresType": "home"
+          "addressType": "home"
         }
   auth: inherit
 

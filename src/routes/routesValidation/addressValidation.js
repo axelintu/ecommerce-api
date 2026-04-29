@@ -39,7 +39,7 @@ const createAddressValidation = [
 		.isLength({ max: 10 })
 		.withMessage("Phone number must not exceed 10 characters")
 		.trim(),
-	body("addresType")
+	body("addressType")
 		.optional()
 		.isIn(["home", "work", "other"])
 		.withMessage("Invalid address type"),
@@ -87,7 +87,7 @@ const updateAddressValidation = [
 		.isLength({ max: 10 })
 		.withMessage("Phone number must not exceed 10 characters")
 		.trim(),
-	body("addresType")
+	body("addressType")
 		.optional()
 		.isIn(["home", "work", "other"])
 		.withMessage("Invalid address type"),
