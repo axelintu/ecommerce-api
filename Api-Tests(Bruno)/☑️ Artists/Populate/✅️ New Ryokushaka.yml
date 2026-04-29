@@ -13,7 +13,7 @@ http:
         "urlName": "ryokushaka",
         "name": "Ryokuoushoku Shakai (緑黄色社会)",
         "description": "Ryokuoushoku Shakai, abreviado como Ryokushaka, es una banda japonesa de pop rock formada en 2012 en la prefectura de Aichi. La banda está compuesta por la vocalista y guitarrista Haruko Nagaya, el guitarrista Issei Kobayashi, la tecladista Peppe y el bajista Shingo Anami.",
-        "imageURL": "/images/prods/ryokushaka/66844__0_0_0.jpg"
+        "imageUrl": "/images/prods/ryokushaka/66844__0_0_0.jpg"
       }
   auth: inherit
 
@@ -25,7 +25,7 @@ runtime:
         const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_ryokushaka", id);
+        bru.setEnvVar("artist_ryokushaka", id, { persist: true });
 
 settings:
   encodeUrl: true

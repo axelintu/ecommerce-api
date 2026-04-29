@@ -13,7 +13,7 @@ http:
         "urlName": "hanabie",
         "name": "Hanabie. (花冷え。)",
         "description": "Banda femenina de metalcore japonesa formada en 2015. Autodefinen su estilo como 'Harajuku-core', mezclando elementos pesados de metalcore y nu-metal con una estética colorida y letras inspiradas en la cultura pop japonesa moderna.",
-        "imageURL": "https://placehold.co/800x600.png"
+        "imageUrl": "https://placehold.co/800x600.png"
       }
   auth: inherit
 
@@ -25,7 +25,7 @@ runtime:
         const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_hanabie", id);
+        bru.setEnvVar("artist_hanabie", id, { persist: true });
 
 settings:
   encodeUrl: true

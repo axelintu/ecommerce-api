@@ -13,7 +13,7 @@ http:
         "urlName": "haku",
         "name": "haku. (ハク。)",
         "description": "Banda de indie rock originaria de Osaka formada en 2019. Se distinguen por su sonido fresco y melódico, liderado por la voz distintiva de su vocalista y letras que capturan la esencia de la juventud y la cotidianidad con un toque nostálgico.",
-        "imageURL": "https://placehold.co/800x600.png"
+        "imageUrl": "https://placehold.co/800x600.png"
       }
   auth: inherit
 
@@ -25,7 +25,7 @@ runtime:
         const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_haku", id);
+        bru.setEnvVar("artist_haku", id, { persist: true });
 
 settings:
   encodeUrl: true

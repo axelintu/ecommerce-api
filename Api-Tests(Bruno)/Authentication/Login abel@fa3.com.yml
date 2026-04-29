@@ -23,7 +23,7 @@ runtime:
         const token = res.getBody().token;
 
         // Save it to the active environment
-        bru.setEnvVar("JWT", token);
+        bru.setEnvVar("JWT", token, { persist: true });
 
 settings:
   encodeUrl: true

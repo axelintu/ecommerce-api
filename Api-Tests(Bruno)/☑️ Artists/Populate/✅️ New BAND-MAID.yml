@@ -13,7 +13,7 @@ http:
         "urlName": "band-maid",
         "name": "BAND-MAID",
         "description": "Banda de rock/metal japonesa formada en 2013. Su concepto está inspirado en las Café Maids, combinando un uniforme temático con música de rock y metal potente. Reconocida por sus habilidades instrumentales excepcionales y su energía en vivo.",
-        "imageURL": "https://placehold.co/800x600.png"
+        "imageUrl": "https://placehold.co/800x600.png"
       }
   auth: inherit
 
@@ -25,7 +25,7 @@ runtime:
         const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_BANDMAID", id);
+        bru.setEnvVar("artist_BANDMAID", id, { persist: true });
 
 settings:
   encodeUrl: true

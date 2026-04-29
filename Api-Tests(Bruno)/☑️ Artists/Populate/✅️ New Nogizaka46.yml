@@ -13,7 +13,7 @@ http:
         "urlName": "nogizaka46",
         "name": "Nogizaka46 (乃木坂46)",
         "description": "Grupo de idols femenino japonés formado en 2011 como el rival oficial de AKB48. Producido por Yasushi Akimoto, el grupo es conocido por su elegancia, armonías vocales y por haber cultivado algunas de las personalidades más influyentes en el entretenimiento japonés actual.",
-        "imageURL": "https://placehold.co/800x600.png"
+        "imageUrl": "https://placehold.co/800x600.png"
       }
   auth: inherit
 
@@ -25,7 +25,7 @@ runtime:
         const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_nogizaka46", id);
+        bru.setEnvVar("artist_nogizaka46", id, { persist: true });
 
 settings:
   encodeUrl: true

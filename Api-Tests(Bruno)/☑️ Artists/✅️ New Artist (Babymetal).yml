@@ -13,7 +13,7 @@ http:
           "urlName": "babymetal",
         "name": "BABYMETAL",
         "description": "Grupo de metal/pop japonés formado en 2010.",
-          "imageURL": "https://placehold.co/800x600.png",
+          "imageUrl": "https://placehold.co/800x600.png",
           "backgroundImageURL": "https://placehold.co/800x600.png"
       }
   auth: inherit

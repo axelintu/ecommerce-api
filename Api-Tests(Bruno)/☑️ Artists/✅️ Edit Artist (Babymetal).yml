@@ -18,11 +18,11 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        // Extract access_token from the JSON response body
-        const token = res.getBody()._id;
+        
+        const id = res.getBody()._id;
 
         // Save it to the active environment
-        bru.setEnvVar("artist_babymetal", _id);
+        bru.setEnvVar("artist_babymetal", id, { persist: true });
 
 settings:
   encodeUrl: true
