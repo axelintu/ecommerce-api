@@ -25,9 +25,7 @@ const checkAddressOwnershipById = async (req, res, next) => {
 		}
 
 		next();
-	} catch (error) {
-		next(error);
-	}
+	} catch (error) { next(error) }
 };
 
-export { checkAddressOwnershipById };
+export default checkAddressOwnershipById;

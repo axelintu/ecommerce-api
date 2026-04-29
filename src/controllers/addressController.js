@@ -23,11 +23,23 @@ export const getAddressById = async (req, res, next) => {
 		const { id } = req.params;
 		const userId = req.user.userId;
 
-		const address = await Address.findOne({ _id: id, user: userId });
+		const address = await Address.findOne({ _id: id });
 		if (!address) {
 			return res.status(404).json({ message: "Address not found" });
 		}
-		res.status(200).json(address);
+		await address.populate("user", "-password -__v -updatedAt -createdAt");
+		const retAdd = {};
+		retAdd._id         = address._id;
+		retAdd.user        = address.user;
+		retAdd.alias       = address.alias;
+		retAdd.city        = address.city;
+		retAdd.state       = address.state;
+		retAdd.postalCode  = address.postalCode;
+		retAdd.country     = address.country;
+		retAdd.phone       = address.phone;
+		retAdd.isDefault   = address.isDefault;
+		retAdd.addresType = address.addresType;
+		res.status(200).json(retAdd);
 	} catch (error) {
 		next(error);
 	}

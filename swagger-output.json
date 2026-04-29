@@ -254,20 +254,6 @@
           "404": {
             "description": "Not Found"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1133,9 +1119,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "user": {
-                    "example": "any"
-                  },
                   "type": {
                     "example": "any"
                   },
@@ -1189,6 +1172,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -1320,6 +1306,9 @@
                     "example": "any"
                   },
                   "password": {
+                    "example": "any"
+                  },
+                  "phone": {
                     "example": "any"
                   },
                   "role": {

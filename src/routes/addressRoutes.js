@@ -9,7 +9,7 @@ import {
 import validate from "../middleware/validation.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/isAdminMiddleware.js";
-import { checkAddressOwnershipById } from "../middleware/checkAddressOwnership.js";
+import checkAddressOwnershipById from "../middleware/checkAddressOwnership.js";
 import {
 	addressIdValidation,
 	createAddressValidation,

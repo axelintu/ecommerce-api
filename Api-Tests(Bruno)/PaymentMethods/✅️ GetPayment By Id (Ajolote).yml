@@ -1,5 +1,5 @@
 info:
-  name: ✅️ GetPayment By Id
+  name: ✅️ GetPayment By Id (Ajolote)
   type: http
   seq: 3
 
@@ -8,7 +8,7 @@ http:
   url: "{{APIaddress}}/{{endpoint}}/:id"
   params:
     - name: id
-      value: ""
+      value: 69f120f93439bd6c027a7cae
       type: path
   auth: inherit
 

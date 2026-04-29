@@ -9,6 +9,7 @@ import {
 import validate from "../middleware/validation.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/isAdminMiddleware.js";
+import checkPaymentOwnershipById from "../middleware/checkPaymentOwnership.js";
 import {
 	paymentIdValidation,
 	createPaymentValidation,
@@ -28,6 +29,7 @@ router.get(
 	authMiddleware,
 	paymentIdValidation,
 	validate,
+	checkPaymentOwnershipById,
 	getPaymentMethodById,
 );
 
