@@ -5,6 +5,7 @@ import {
 	createCart,
 	updateCart,
 	addProductToCart,
+	removeProductFromCart,
 	deleteCart,
 } from "../controllers/cartController.js";
 import validate from "../middleware/validation.js";
@@ -15,7 +16,8 @@ import {
 	userIdValidation,
 	createCartValidation,
 	putCartValidation,
-	addToCartValidation
+	addToCartValidation,
+	removeFromCartValidation
 } from "./routesValidation/cartValidation.js";
 import checkOwnership from "../middleware/checkOwnershipById.js";
 import Cart from "../models/Cart.js";
@@ -72,6 +74,15 @@ router.put(
 	addToCartValidation,
 	validate,
 	addProductToCart,
+);
+
+router.put(
+	"/remove/:id",
+	authMiddleware,
+	checkCartOwnership,
+	removeFromCartValidation,
+	validate,
+	removeProductFromCart,
 );
 
 router.delete(

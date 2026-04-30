@@ -45,6 +45,7 @@ const putCartValidation = [
 		.isInt({ min: 1 })
 		.withMessage("Quantity must be an integer greater than or equal to 1"),
 ];
+
 const addToCartValidation = [
 	param("id")
 		.isMongoId()
@@ -59,10 +60,20 @@ const addToCartValidation = [
 		.withMessage("Quantity must be an integer greater than or equal to 1")
 ];
 
+const removeFromCartValidation = [
+	param("id")
+		.isMongoId()
+		.withMessage("Cart ID must be a valid MongoDB ObjectId"),
+	body("productId")
+		.notEmpty()
+		.withMessage("ProductId must be a valid MongoDB ObjectId")
+];
+
 export {
 	cartIdValidation,
 	userIdValidation,
 	createCartValidation,
 	putCartValidation,
-	addToCartValidation
+	addToCartValidation,
+	removeFromCartValidation
 };

@@ -36,8 +36,8 @@ export const getCartByUser = async (req, res, next) => {
 	try {
 		const userId = req.params.id;
 		const cart = await Cart.find({ user: userId })
-			.populate("user", "-password -__v -updatedAt -createdAt")
-			.populate("products.product");
+			// .populate("user", "-password -__v -updatedAt -createdAt")
+			// .populate("products.product");
 		if (!cart) {
 			return res
 				.status(404)
@@ -162,6 +162,39 @@ export const addProductToCart = async (req, res, next) => {
 		res.json(cart);
 	}
 	catch (error) { next(error); }
+};
+
+export const removeProductFromCart = async (req, res, next) => {
+	/*  #swagger.tags = ['Cart']
+	*/
+	try {
+		const { productId } = req.body;
+		const userId = req.user.userId;
+
+		const cart = await Cart.findOne({ user: userId });
+
+		if (!cart) {
+			return res.status(404).json({ message: "Cart not found for this user" });
+		}
+
+		const initialLength = cart.products.length;
+		cart.products = cart.products.filter(
+			(item) => item.product.toString() !== productId
+		);
+
+		if (cart.products.length === initialLength) {
+			return res.status(404).json({ message: "Product not found in cart" });
+		}
+
+		// 4. Save and populate
+		await cart.save();
+		await cart.populate("user", "-password -__v -updatedAt -createdAt");
+		await cart.populate("products.product");
+
+		res.status(200).json(cart);
+	} catch (error) {
+		next(error);
+	}
 };
 
 
