@@ -1,39 +1,51 @@
 import mongoose from "mongoose";
 
-const featuresObjectSchema = new mongoose.Schema({
-	type: {
-		type: String,
-		trim: true
-	},
-	data: {
-		type: Map,
-		of: String,
-		default: {}
-	}
-}, { _id: false });
-
-const featuresArraySchema = new mongoose.Schema({
-	type: {
-		type: String,
-		enum: ["p", "li", "div"],
-		trim: true
-	},
-	data: {
-		type: [String],
-		default: []
-	}
-}, { _id: false });
-
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema(
+{
 	name: {
 		type: String,
 		required: true,
-		trim: true
+		trim: true,
 	},
-	descriptionObject: featuresObjectSchema,
-	descriptionArray: featuresArraySchema,
-	featuresObjet: featuresObjectSchema,
-	featuresArray: featuresArraySchema,
+	description: [{
+		tag: {
+			type: String,
+			enum: ["p", "ul", "ol", "h2", "h3"],
+			required: true,
+		},
+		class: {
+			type: String,
+			enum: ["info", "warning", "success", "highlight"],
+			required: true,
+		},
+		type: {
+			type: String,
+			enum: ["normal", "key-value-pair"],
+			required: true,
+		},
+		data: {
+			type: mongoose.Schema.Types.Mixed,
+			validate: {
+				validator: function (v) {
+					if (this.type === "normal" && !Array.isArray(v))
+						return false;
+					if (
+						this.type === "key-value-pair" &&
+						typeof v !== "object"
+					)
+						return false;
+					return true;
+				},
+				message:
+					"Data must be array for 'normal' type and object for 'key-value-pair' type",
+			},
+			required: true,
+		},
+	},
+	{ 
+		_id: false, 
+		timestamps: false,
+	}],
 	notes: [
 		{
 			class: {
@@ -47,10 +59,12 @@ const productSchema = new mongoose.Schema({
 		}
 	],
 	price: {
-		type: Number, required: true
+		type: Number,
+		required: true
 	},
 	stock: {
-		type: Number, default: 0
+		type: Number,
+		default: 0
 	},
 	imageURL: {
 		type: String,
@@ -69,6 +83,7 @@ const productSchema = new mongoose.Schema({
 	artist: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Artist",
+		required: true
 	},
 }, {
 	timestamps: true

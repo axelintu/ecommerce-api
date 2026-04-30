@@ -1,0 +1,87 @@
+info:
+  name: New (Babymetal x Slaugther)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "Playera Slaughter To Prevail - BABY SLAUGHTER",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Prepárate para el apocalipsis más adorable.",
+              "Esta camiseta oficial crossover trae el caos kawaii de *BABYMETAL* al brutal,niverso de *Slaughter to Prevail*. El estampado frontal presenta un oso rosa demoníaco, guerreros chibi, calabazas en llamas y suficiente actitud para arrasar un estadio.",
+              "Lo lindo se encuentra con la crueldad. El metal se encuentra con la locura.",
+              "Esta camiseta es suave, transpirable y está diseñada para resistir tanto en pogo como en reinos mágicos. Su impresión de alta calidad garantiza que cada detalle se mantenga nítido tanto en el escenario como en la calle."
+            ]
+          },
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": 
+            {
+              "Materiales": "Algodón, poliéster, hierro, resina ABS",
+              "Tamaño [Bolsa]": "Aprox. W8 x H10 x D6cm.",
+              "Tamaño [Dulces Konpeito]": "Tamaño de la bolsa: Aprox. W7 x H7cm",
+              "Consumir preferentemente antes de": "Junio de 2026",
+              "Instrucciones de almacenamiento": "Almacenar en un lugar fresco y oscuro, alejado de la luz solar directa, altas temperaturas y humedad. Consumir lo antes posible después de abrir."
+            }
+        },
+          {
+            "tag": "p",
+            "type": "normal",
+            "class": "info",
+            "data": [
+              "Colaboración oficial de BABYMETAL x Slaughter To Prevail",
+              "Gráfico frontal de gran tamaño con arte de personaje personalizado.",
+              "Serigrafía duradera y de alta calidad.",
+              "Camisa de algodón Gildan Hammer suave y transpirable",
+              "Edición limitada, solo para verdaderos fanáticos"
+            ]
+          }
+        ],
+        "notes": [
+          {
+            "class": "info",
+            "data": "Representaciones del producto: Tenga en cuenta que la mayoría de las imágenes de nuestra tienda son maquetas, no fotos reales. Estas representaciones digitales muestran el aspecto final del producto, pero el producto real puede variar ligeramente."
+          }
+        ],
+        "price": 454.99,
+        "image": "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png",
+        "images": [
+          "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png",
+          "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-7719429.jpg",
+          "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-8439721.jpg"
+        ],
+        "artist": "{{artist_babymetal}}",
+        "category": "{{cat_apparel}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
