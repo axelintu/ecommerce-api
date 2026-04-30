@@ -1,17 +1,16 @@
 info:
-  name: Add Product to Cart
+  name: Remove Product from Cart
   type: http
-  seq: 5
+  seq: 6
 
 http:
   method: PUT
-  url: "{{APIaddress}}/{{endpoint}}/add/69f3a51432cfb2fdfd90e697"
+  url: "{{APIaddress}}/{{endpoint}}/remove/69f3a51432cfb2fdfd90e697"
   body:
     type: json
     data: |-
       {
-        "productId": "69f39504b13a1aec6f4aca83",
-        "quantity": 1
+        "productId": "69f39548b13a1aec6f4acaac"
       }
   auth: inherit
 

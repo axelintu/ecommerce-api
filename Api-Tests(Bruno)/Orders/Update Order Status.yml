@@ -1,0 +1,26 @@
+info:
+  name: Update Order Status
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/{{endpoint}}/:id"
+  params:
+    - name: id
+      value: 69f3b345dfa4184381b62a64
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "status": "processing",
+        "paymentStatus": "paid"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

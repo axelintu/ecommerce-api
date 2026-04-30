@@ -1,0 +1,38 @@
+info:
+  name: New Order
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "user": "69e9b25d4b4640ab55068ab1",
+        "address": "69f100c338042e5f1062ca65",
+        "paymentMethod": "69f11cc83439bd6c027a7c9b",
+        "shippingCost": 0,
+        "totalPrice": 1009.97,
+        "status": "processing",
+        "products": [
+          {
+            "productId": "69f3948e4e0ae089cde7e15d",
+            "price": 454.99,
+            "quantity": 2
+          },
+          {
+            "productId": "69f3953cb13a1aec6f4aca91",
+            "price": 99.99,
+            "quantity": 1
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
