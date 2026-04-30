@@ -1,0 +1,77 @@
+info:
+  name: 🌸 Yorushika - New 4
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Bolsa de tela reversible con temática de Plagiarism",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Este bolso tote reversible presenta bordado."
+            ]
+          },
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Colores": "Gris, Blanco",
+              "Material": "Nailon, Poliéster",
+              "Tamaño": "[Cuerpo] Aprox. 36 cm de ancho x 36 cm de alto x 14 cm de profundidad. \n[Asa] Aprox. 1 cm de grosor x 65 cm de largo. Tenga en cuenta que el color y los detalles del producto real pueden variar con respecto a la fotografía."
+            }
+          }
+        ],
+        "notes": [
+          {
+            "class": "info",
+            "data": "Aprox. 1 cm de grosor x 65 cm de largo. Tenga en cuenta que el color y los detalles del producto real pueden variar con respecto a la fotografía."
+          }
+        ],
+        "price": 99.99,
+        "stock": 25,
+        "imageURL": "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_00.jpg",
+        "images": [
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_00.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_01.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_02.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_03.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_04.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_05.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_06.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_07.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_08.jpg",
+          "/images/prods/yorushika/1764564515173/yorushika_0801_tote_S5tbHFfZ_09.jpg"
+        ],
+        "artist": "{{artist_yorushika}}",
+        "category": "{{cat_totebags}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

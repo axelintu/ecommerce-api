@@ -1,0 +1,66 @@
+info:
+  name: 🌸 Yorushika - New 1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Medalla del Gacha ZENSE 2024",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Esta es una medalla exclusiva para el gacha celebrado en el LIVE TOUR 2024 \"Zensei\" de Yorushika."
+            ]
+          },
+          {
+            "tag": "ul",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Color": "Plata",
+              "Material": "Hierro",
+              "Tamaño": "27mm"
+            }
+          }
+        ],
+        "notes": [
+          {
+            "class": "info",
+            "data": "Estas medallas se utilizaron en el gacha celebrado en el LIVE TOUR 2024 'Zensei'. Se han limpiado y desinfectado. Al no ser nuevas, pueden presentar pequeños arañazos."
+          }
+        ],
+        "price": 99.99,
+        "stock": 25,
+        "imageURL": "/images/prods/yorushika/1764535731828/YORUSHIKA_w6ZbzfHh_251110_medal_zensei2024.jpg",
+        "images": [],
+        "artist": "{{artist_yorushika}}",
+        "category": "{{cat_tourmerch}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

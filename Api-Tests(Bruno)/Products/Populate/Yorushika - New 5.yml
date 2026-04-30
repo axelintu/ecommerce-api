@@ -1,0 +1,69 @@
+info:
+  name: 🌸 Yorushika - New 5
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Plagiarism Re-enactment (盗作再演): LLavero de peluche de perro de azúcar",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Este es un llavero de peluche de Corgi diseñado por Suis. Contiene un caramelo konpeito en su interior."
+            ]
+          },
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Materiales": "Algodón, poliéster, hierro, resina ABS",
+              "Tamaño": "[Bolsa] Aprox. W8 x H10 x D6cm. \n[Dulces Konpeito] Tamaño de la bolsa: Aprox. W7 x H7cm",
+              "Consumir preferentemente antes de": "junio de 2026",
+              "Instrucciones de almacenamiento": "Almacenar en un lugar fresco y oscuro, alejado de la luz solar directa, altas temperaturas y humedad. Consumir lo antes posible después de abrir."
+            }
+          }
+        ],
+        "notes": [
+          {
+            "data": "Se pueden encontrar puntos negros en la superficie, pero estos son inherentes a los ingredientes y no afectan la calidad. ",
+            "class": "info"
+          }
+        ],
+        "price": 99.99,
+        "stock": 25,
+        "imageURL": "/images/prods/yorushika/1764566424812/re_yorushika_tousaku_0815_en5tsHew3y_13.jpg",
+        "images": [
+          "/images/prods/yorushika/1764566424812/yorushika_0801_konpeitoukey_S5tbHFfZ_01.jpg"
+        ],
+        "artist": "{{artist_yorushika}}",
+        "category": "{{cat_keychains}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

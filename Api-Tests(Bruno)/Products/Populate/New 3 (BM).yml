@@ -1,0 +1,57 @@
+info:
+  name: 🦊 New 3 (BM)
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "Abanico plegable exclusivo intuit dome con logotipo",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": ["Abanico negro con logo BABYMETAL."]
+          }
+        ],
+        "notes": [
+          {
+            "data": "Representaciones del producto: Tenga en cuenta que la mayoría de las imágenes de nuestra tienda son maquetas, no fotos reales. Estas representaciones digitales muestran el aspecto final del producto, pero el producto real puede variar ligeramente.",
+            "class": "info"
+          }
+        ],
+        "price": 454.99,
+        "stock": 25,
+        "imageURL": "/images/prods/babymetal/1764728380647/8Y.99131.32.png",
+        "images": [
+          "/images/prods/babymetal/1764728380647/8Y.99131.32.png",
+          "/images/prods/babymetal/1764728380647/8Y.99131.32-1.png"
+        ],
+        "artist": "{{artist_babymetal}}",
+        "category": "{{cat_tourmerch}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

@@ -1,30 +1,24 @@
 info:
-  name: UPDATE (BM x STP) photo
+  name: Delete Product
   type: http
-  seq: 4
+  seq: 8
 
 http:
-  method: PUT
+  method: DELETE
   url: "{{APIaddress}}/{{endpoint}}/:id"
   params:
     - name: id
-      value: 69f3948e4e0ae089cde7e15d
+      value: 69f39345ecc3638b442ed602
       type: path
   body:
     type: json
-    data: |
-      {
-        "imageURL": "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png"
-      }
+    data: ""
   auth: inherit
 
 runtime:
-  scripts:
-    - type: after-response
-      code: |-
-        test("Successful POST request", function () {
-            expect(res.getStatus()).to.be.oneOf([200, 201]);
-        });
+  variables:
+    - name: toDelete
+      value: 69f26899d075c554c978fdb4
 
 settings:
   encodeUrl: true

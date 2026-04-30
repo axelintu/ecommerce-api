@@ -1,0 +1,75 @@
+info:
+  name: 🌸 Yorushika - New 6
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Abanico plegable de Plagiarism Re-enactment (盗作再演)",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Este abanico plegable lleva una inscripción \"plagio\" oculta."
+            ]
+          },
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Color": "Azul",
+              "Materiales": "[Abanico] Bambú, poliéster; \n[Bolsa] Algodón, poliéster; \n[Dije] Aleación de zinc",
+              "Tamaño": "[Bolsa] Aprox. 21 cm de largo; Aprox. 4,5 cm de ancho x 22 cm de alto"
+            }
+          }
+        ],
+        "notes": [
+          {
+            "data": "Tenga en cuenta que el color y los detalles del producto real pueden variar con respecto a la fotografía.",
+            "class": "info"
+          }
+        ],
+        "price": 99.99,
+        "stock": 24,
+        "imageURL": "/images/prods/yorushika/1764649677154/re_yorushika_tousaku_0815_en5tsHew3y_14.jpg",
+        "images": [
+          "/images/prods/yorushika/1764649677154/re_yorushika_tousaku_0815_en5tsHew3y_14.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_01.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_02.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_03.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_04.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_05.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_066.jpg",
+          "/images/prods/yorushika/1764649677154/yorushika_0801_sensu_S5tbHFfZ_07.jpg"
+        ],
+        "artist": "{{artist_yorushika}}",
+        "category": "{{cat_tourmerch}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

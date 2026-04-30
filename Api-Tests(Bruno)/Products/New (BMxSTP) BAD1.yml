@@ -1,7 +1,7 @@
 info:
   name: New (BMxSTP) BAD1
   type: http
-  seq: 4
+  seq: 6
 
 http:
   method: POST

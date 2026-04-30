@@ -1,0 +1,54 @@
+info:
+  name: 🦊 New 2 (BM)
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Spirit foxes Tote Bag",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": ["Bolso de mano Spirit foxes 100% algodón negro."]
+          }
+        ],
+        "notes": [
+          {
+            "data": "Representaciones del producto: Tenga en cuenta que la mayoría de las imágenes de nuestra tienda son maquetas, no fotos reales. Estas representaciones digitales muestran el aspecto final del producto, pero el producto real puede variar ligeramente.",
+            "class": "info"
+          }
+        ],
+        "price": 454.99,
+        "stock": 25,
+        "imageURL": "/images/prods/babymetal/1764728068770/SPIRIT_FOXES-TOTE_2048x@2x.jpg",
+        "images": [],
+        "artist": "{{artist_babymetal}}",
+        "category": "{{cat_totebags}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
