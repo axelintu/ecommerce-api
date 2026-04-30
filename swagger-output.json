@@ -474,9 +474,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "Cart"
-        ],
         "description": "",
         "parameters": [
           {
@@ -489,11 +486,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -591,6 +585,16 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/cart/remove/{id}": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }

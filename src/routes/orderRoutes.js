@@ -13,18 +13,21 @@ import {
 	createOrderValidation,
 	updateOrderStatusValidation,
 } from "./routesValidation/orderValidation.js";
+import checkOwnership from "../middleware/checkOwnershipById.js";
+import Order from "../models/Order.js";
+const checkOrderOwnership = checkOwnership(Order, "Order");
 
 const router = express.Router();
 
 router.get(
 	"/",
 	authMiddleware,
-	isAdmin,
 	getOrders);
 
 router.get(
 	"/:id",
 	authMiddleware,
+	checkOrderOwnership,
 	orderIdValidation,
 	validate,
 	getOrderById,
@@ -43,6 +46,7 @@ router.put(
 	authMiddleware,
 	updateOrderStatusValidation,
 	validate,
+	checkOrderOwnership,
 	updateOrderStatus,
 );
 

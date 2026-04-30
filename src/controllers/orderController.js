@@ -4,7 +4,9 @@ export const getOrders = async (req, res, next) => {
 	/*  #swagger.tags = ['Orders']
 	*/
 	try {
-		const orders = await Order.find()
+		const userId = req.user.userId;
+
+		const orders = await Order.find({ user: userId })
 			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.productId")
 			.populate("paymentMethod")
