@@ -1,10 +1,10 @@
 import express from "express";
 import {
-	getCarts,
 	getCartById,
 	getCartByUser,
 	createCart,
 	updateCart,
+	addProductToCart,
 	deleteCart,
 } from "../controllers/cartController.js";
 import validate from "../middleware/validation.js";
@@ -14,23 +14,28 @@ import {
 	cartIdValidation,
 	userIdValidation,
 	createCartValidation,
-	putCartValidation
+	putCartValidation,
+	addToCartValidation
 } from "./routesValidation/cartValidation.js";
+import checkOwnership from "../middleware/checkOwnershipById.js";
+import Cart from "../models/Cart.js";
+const checkCartOwnership = checkOwnership(Cart, "Cart");
 
 const router = express.Router();
 
-router.get(
+/* router.get(
 	"/",
 	authMiddleware,
-	isAdmin,
+	checkCartOwnership,
 	getCarts
 );
+*/
 
 router.get(
 	"/:id",
 	authMiddleware,
-	isAdmin,
 	cartIdValidation,
+	checkCartOwnership,
 	validate,
 	getCartById,
 );
@@ -54,15 +59,26 @@ router.post(
 router.put(
 	"/:id",
 	authMiddleware,
+	checkCartOwnership,
 	putCartValidation,
 	validate,
 	updateCart,
+);
+
+router.put(
+	"/add/:id",
+	authMiddleware,
+	checkCartOwnership,
+	addToCartValidation,
+	validate,
+	addProductToCart,
 );
 
 router.delete(
 	"/:id",
 	authMiddleware,
 	cartIdValidation,
+	checkCartOwnership,
 	validate,
 	deleteCart,
 );

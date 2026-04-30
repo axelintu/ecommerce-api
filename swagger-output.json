@@ -410,47 +410,6 @@
         }
       }
     },
-    "/cart/": {
-      "get": {
-        "tags": [
-          "Cart"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Cart"
-        ],
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user": {
-                    "example": "any"
-                  },
-                  "products": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/cart/{id}": {
       "get": {
         "tags": [
@@ -505,9 +464,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "userId": {
-                    "example": "any"
-                  },
                   "products": {
                     "example": "any"
                   }
@@ -568,6 +524,77 @@
         }
       }
     },
+    "/cart/": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "products": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/add/{id}": {
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Add item to cart",
+        "description": "Adds a specific product to the user\\'s cart.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item added successfully"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "example": "any"
+                  },
+                  "quantity": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/categories/": {
       "get": {
         "tags": [
@@ -588,6 +615,9 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
           }
         },
         "requestBody": {
@@ -667,6 +697,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
           }
         },
         "requestBody": {
@@ -963,6 +996,9 @@
                   "description": {
                     "example": "any"
                   },
+                  "notes": {
+                    "example": "any"
+                  },
                   "price": {
                     "example": "any"
                   },
@@ -970,6 +1006,9 @@
                     "example": "any"
                   },
                   "imageURL": {
+                    "example": "any"
+                  },
+                  "images": {
                     "example": "any"
                   },
                   "artist": {
@@ -1031,38 +1070,6 @@
           },
           "404": {
             "description": "Not Found"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "example": "any"
-                  },
-                  "description": {
-                    "example": "any"
-                  },
-                  "price": {
-                    "example": "any"
-                  },
-                  "stock": {
-                    "example": "any"
-                  },
-                  "imageURL": {
-                    "example": "any"
-                  },
-                  "artist": {
-                    "example": "any"
-                  },
-                  "category": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
           }
         }
       },

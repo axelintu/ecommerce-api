@@ -13,11 +13,6 @@ const userIdValidation = [
 ];
 
 const createCartValidation = [
-	body("user")
-		.notEmpty()
-		.withMessage("User is required")
-		.isMongoId()
-		.withMessage("User ID must be a valid MongoDB ObjectId"),
 	body("products")
 		.optional()
 		.isArray()
@@ -34,11 +29,6 @@ const putCartValidation = [
 	param("id")
 		.isMongoId()
 		.withMessage("Cart ID must be a valid MongoDB ObjectId"),
-	body("user")
-		.notEmpty()
-		.withMessage("User is required")
-		.isMongoId()
-		.withMessage("User ID must be a valid MongoDB ObjectId"),
 	body("products")
 		.notEmpty()
 		.withMessage("Products array is required")
@@ -55,10 +45,24 @@ const putCartValidation = [
 		.isInt({ min: 1 })
 		.withMessage("Quantity must be an integer greater than or equal to 1"),
 ];
+const addToCartValidation = [
+	param("id")
+		.isMongoId()
+		.withMessage("Cart ID must be a valid MongoDB ObjectId"),
+	body("productId")
+		.notEmpty()
+		.withMessage("ProductId must be a valid MongoDB ObjectId"),
+	body("quantity")
+		.optional()
+		.notEmpty()
+		.isInt({ min: 1 })
+		.withMessage("Quantity must be an integer greater than or equal to 1")
+];
 
 export {
 	cartIdValidation,
 	userIdValidation,
 	createCartValidation,
-	putCartValidation
+	putCartValidation,
+	addToCartValidation
 };

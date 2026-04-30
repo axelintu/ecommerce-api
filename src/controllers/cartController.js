@@ -13,11 +13,14 @@ export const getCarts = async (req, res, next) => {
 };
 
 export const getCartById = async (req, res, next) => {
+	
 	/*  #swagger.tags = ['Cart']
 	*/
 	try {
 		const { id } = req.params;
-		const cart = await Cart.findById(id);
+		const cart = await Cart.findById(id)
+			.populate("user", "-password -__v -updatedAt -createdAt")
+			.populate("products.product");;
 		if (!cart) {
 			return res
 				.status(404)
@@ -31,8 +34,8 @@ export const getCartByUser = async (req, res, next) => {
 	/*  #swagger.tags = ['Cart']
 	*/
 	try {
-		const userId = req.params.userId;
-		const cart = await Cart.findOne({ user: userId })
+		const userId = req.params.id;
+		const cart = await Cart.find({ user: userId })
 			.populate("user", "-password -__v -updatedAt -createdAt")
 			.populate("products.product");
 		if (!cart) {
@@ -68,9 +71,20 @@ export const createCart = async (req, res, next) => {
 	/*  #swagger.tags = ['Cart']
 	*/
 	try {
-		const { user, products } = req.body;
+		// const { user, products } = req.body;
+		const { products } = req.body;
+		const user = req.user.userId;
 
 		validateProducts(res, user, products);
+
+		const existingCart = await Cart.findOne({ user });
+		
+		if (existingCart) {
+			return res.status(400).json({ 
+				message: "User already has an active cart.",
+				cartId: existingCart._id 
+			});
+		}
 
 		const newCart = await Cart.create({
 			user,
@@ -88,7 +102,8 @@ export const updateCart = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const { userId, products } = req.body;
+		const { products } = req.body;
+		const user = req.user.userId;
 
 		validateProducts(res, user, products);
 
@@ -98,7 +113,7 @@ export const updateCart = async (req, res, next) => {
 			{ new: true }
 		)
 			.populate("user", "-password -__v -updatedAt -createdAt")
-			.pouplate("products.product");
+			.populate("products.product");
 
 		if (!updatedCart) {
 			return res.status(404).json({ message: "Cart not found" });
@@ -108,10 +123,20 @@ export const updateCart = async (req, res, next) => {
 };
 
 export const addProductToCart = async (req, res, next) => {
-	/*  #swagger.tags = ['Cart']
+	/* #swagger.tags = ['Cart']
+		#swagger.summary = 'Add item to cart'
+		#swagger.description = 'Adds a specific product to the user\'s cart.'
+		
+		#swagger.parameters['body'] = {
+			$productId: MongoDB ObjectId,
+			quantity: Number
+		}
+		
+		#swagger.responses[200] = { description: 'Item added successfully' }
 	*/
 	try {
-		const { userId, productId, quantity = 1 } = req.body;
+		const { productId, quantity = 1 } = req.body;
+		const userId = req.user.userId;
 		const cart = await Cart.findOne({ user: userId });
 		// check if const or let in testing
 		if (!cart) {
@@ -126,13 +151,13 @@ export const addProductToCart = async (req, res, next) => {
 			if (existingProductIndex >= 0) {
 				cart.products[existingProductIndex].quantity += quantity;
 			} else {
-				cart.products.push({ product, productId, quantity })
+				cart.products.push({ product: productId, quantity })
 			}
 		}
 
 		await cart.save();
 		await cart.populate("user", "-password -__v -updatedAt -createdAt");
-		await cart.populate("products.productId");
+		await cart.populate("products.product");
 
 		res.json(cart);
 	}
