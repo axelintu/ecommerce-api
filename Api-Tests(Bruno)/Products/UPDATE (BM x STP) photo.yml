@@ -1,10 +1,10 @@
 info:
   name: UPDATE (BM x STP) photo
   type: http
-  seq: 2
+  seq: 4
 
 http:
-  method: POST
+  method: PUT
   url: "{{APIaddress}}/{{endpoint}}/:id"
   params:
     - name: id
@@ -14,7 +14,7 @@ http:
     type: json
     data: |
       {
-        "image": "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png"
+        "imageURL": "/images/prods/babymetal/1764724545076/slaughter-to-prevail-x-babymetal-babyslaugher-bear-t-shirt-265761.png"
       }
   auth: inherit
 

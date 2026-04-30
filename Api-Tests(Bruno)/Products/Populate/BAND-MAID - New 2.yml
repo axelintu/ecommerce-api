@@ -1,0 +1,79 @@
+info:
+  name: 🎀 BAND-MAID - New 2
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "BAND-MAID 'Epic Narratives' Edición Limitada (CD + Blu-ray + LIBRO DE FOTOS)",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "¡Lanzamiento de la primera edición limitada! Este artículo está disponible por orden de llegada. Por primera vez en tres años y medio, BAND-MAID lanzará un álbum muy esperado. ¡Pide \"Epic Narratives\" de BAND-MAID ahora y recibe una postal de edición limitada de BAND-MAID como beneficio de compra!",
+              "Título : BAND-MAID \"Narrativas Épicas\" Edición Limitada (CD + Blu-ray + LIBRO DE FOTOS)."
+            ]
+          },
+          {
+            "tag": "ul",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Título": "BAND-MAID \"Narrativas Épicas\" Edición Limitada (CD + Blu-ray + LIBRO DE FOTOS)",
+              "[LISTA DE CANCIONES DEL CD]": "\nMemorable \nRuinas \nMejor amiga \nProtegerte \nMUÉSTRALES＊BAND-MAID con The Warning \nTú y yo \nMagia \nCuento prohibido \nComportarse con cuidado \nLa estrella más brillante \nEl único \nCartas para ti \n¡TAMAYA! \nLlegar a la cima",
+              "[CONTENIDO Blu-ray]": "*Solo incluido con la primera edición limitada. \nVideo en vivo de la mesera “EL DÍA DE LA CRIADA” realizado el 10 de mayo de 2024",
+              "Fecha de lanzamiento": " (2024/9/25)",
+              "Número de discos": "1 disco principal (CD), 1 disco extra (Blu-ray)",
+              "Formato": "Álbum, CD + Blu-ray + LIBRO DE FOTOS",
+              "Sello": "Pony Canyon"
+            }
+          }
+        ],
+        "notes": [
+          {
+            "data": "Las imágenes del producto son solo para fines ilustrativos. En cuanto al color y la textura.",
+            "class": "info"
+          },
+          {
+            "data": "El color real del producto puede variar ligeramente del color que se ve en la pantalla según el monitor, el sistema operativo y la versión del navegador. Gracias por su comprensión. - Las medidas de las tallas son aproximadas y pueden variar ligeramente según el producto.",
+            "class": "info"
+          }
+        ],
+        "price": 454.99,
+        "stock": 25,
+        "imageURL": "/images/prods/band-maid/1764816543962/band_maid_epic_narratives.jpg",
+        "images": [
+          "/images/prods/band-maid/1764816543962/band_maid_epic_narratives.jpg",
+          "/images/prods/band-maid/1764816543962/band_maid_epic_narratives_post_card.jpg",
+          "/images/prods/band-maid/1764816543962/content_BM_EN_JK-image_shokai-tsujo_S.jpg"
+        ],
+        "artist": "{{artist_BANDMAID}}",
+        "category": "{{cat_cddvdbluray}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.

@@ -1,0 +1,72 @@
+info:
+  name: 🎀 BAND-MAID - New 1
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{APIaddress}}/{{endpoint}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Playera BAND-MAID TOUR 2025 FINAL ROUND",
+        "description": [
+          {
+            "tag": "p",
+            "class": "info",
+            "type": "normal",
+            "data": [
+              "Producto oficial de alta calidad.",
+              "Este artículo ha sido seleccionado cuidadosamente para formar parte de nuestra colección exclusiva.",
+              "Diseño único y duradero, ideal para fanáticos.",
+              "Perfecto para regalar o para completar tu propia colección de mercancía oficial."
+            ]
+          },
+          {
+            "tag": "ul",
+            "class": "info",
+            "type": "key-value-pair",
+            "data": {
+              "Largo": "73cm",
+              "Ancho": "55cm"
+            }
+          }
+        ],
+        "notes": [
+          {
+            "class": "info",
+            "data": "Las imágenes del producto son solo para fines ilustrativos. En cuanto al color y la textura."
+          },
+          {
+            "class": "info",
+            "data": "El color real del producto puede variar ligeramente del color que se ve en la pantalla según el monitor, el sistema operativo y la versión del navegador. Gracias por su comprensión. - Las medidas de las tallas son aproximadas y pueden variar ligeramente según el producto."
+          }
+        ],
+        "price": 454.99,
+        "stock": 25,
+        "imageURL": "/images/prods/band-maid/1764730439085/BMHTKAGAMInormal.jpg",
+        "images": [],
+        "artist": "{{artist_BANDMAID}}",
+        "category": "{{cat_apparel}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Successful POST request", function () {
+            expect(res.getStatus()).to.be.oneOf([200, 201]);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
