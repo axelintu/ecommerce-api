@@ -1,7 +1,0 @@
-info:
-  name: Wishlist
-  type: folder
-  seq: 10
-
-request:
-  auth: inherit
