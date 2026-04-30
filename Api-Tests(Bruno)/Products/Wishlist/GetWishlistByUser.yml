@@ -8,6 +8,7 @@ http:
   url: "{{APIaddress}}/wishlist/user/69e70c19c435a634926254f7"
   auth:
     type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU3MGMxOWM0MzVhNjM0OTI2MjU0ZjciLCJuYW1lIjoiQWxlamFuZHJvIEZsb3JlcyBDdXN0b21lciIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3Njc1MTUyOCwiZXhwIjoxNzc2NzU1MTI4fQ.aAsX4lJfnxCBsszjLp1Q-VDPez9AOgyIPoYEA_xdSB0
 
 settings:
   encodeUrl: true
