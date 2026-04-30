@@ -6,6 +6,25 @@ const productIdValidation = [
 		.withMessage("Product ID must be a valid MongoDB ObjectId"),
 ];
 
+const isValidImagePath = (path) => {
+	if (typeof path !== "string") return false;
+	if (!path.startsWith("/")) return false;
+	const imageRegex = /\.(jpg|jpeg|png|webp|gif|svg)$/i;
+	return imageRegex.test(path);
+};
+
+const notesValidation = body("notes")
+	.optional()
+	.isArray()
+	.withMessage("Notes must be an array")
+	.custom((arr) => {
+		return arr.every(note => 
+			typeof note.class === "string" && 
+			typeof note.data === "string"
+		);
+	})
+	.withMessage("Each note must contain a class and data string");
+
 const descriptionItemValidation = body("description")
 	.optional()
 	.isArray()
@@ -71,15 +90,41 @@ const createProductValidation = [
 		.withMessage("Price is required")
 		.isFloat({ min: 0 })
 		.withMessage("Price must be a positive number"),
+	body("stock")
+		.optional()
+		.isInt({ min: 0 })
+		.withMessage("Stock must be a non-negative integer"),
+	descriptionItemValidation,
+	notesValidation,
+	body("imageURL")
+		.optional()
+		.custom(isValidImagePath)
+		.withMessage("imageURL must be a valid path (e.g., /images/...)"),
+	body("images")
+		.optional()
+		.isArray()
+		.withMessage("images must be an array")
+		.custom((arr) => {
+			if (!Array.isArray(arr)) return false;
+			return arr.every(
+				(url) => typeof url === "string" && isValidImagePath(url),
+			);
+		})
+		.withMessage("Images must be an array, each image must be a valid path (e.g., /images/...)"),
 	body("category")
 		.optional()
 		.isMongoId()
 		.withMessage("Category must be a valid MongoDB ObjectId"),
-		descriptionItemValidation,
+	body("artist")
+		.isMongoId()
+		.withMessage("Artist must be a valid MongoDB ObjectId"),
 ];
 
 const updateProductValidation = [
-	body("name").optional().notEmpty().withMessage("Name cannot be empty"),
+	body("name")
+		.optional()
+		.notEmpty()
+		.withMessage("Name cannot be empty"),
 	body("price")
 		.optional()
 		.isFloat({ min: 0 })
@@ -88,11 +133,32 @@ const updateProductValidation = [
 		.optional()
 		.isInt({ min: 0 })
 		.withMessage("Stock must be a non-negative integer"),
+	descriptionItemValidation,
+	notesValidation,
+	body("imageURL")
+		.optional()
+		.custom(isValidImagePath)
+		.withMessage("imageURL must be a valid path (e.g., /images/...)"),
+	body("images")
+		.optional()
+		.isArray()
+		.withMessage("images must be an array")
+		.custom((arr) => {
+			if (!Array.isArray(arr)) return false;
+			return arr.every(
+				(url) => typeof url === "string" && isValidImagePath(url),
+			);
+		})
+		.withMessage("Images must be an array, each image must be a valid path (e.g., /images/...)"),
 	body("category")
 		.optional()
+		.notEmpty()
 		.isMongoId()
 		.withMessage("Category must be a valid MongoDB ObjectId"),
-		descriptionItemValidation,
+	body("artist")
+		.optional()
+		.isMongoId()
+		.withMessage("Artist must be a valid MongoDB ObjectId"),
 ];
 
 export {

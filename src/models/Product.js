@@ -68,7 +68,7 @@ const productSchema = new mongoose.Schema(
 	},
 	imageURL: {
 		type: String,
-		default: "https://placehold.co/600x400",
+		default: "/images/placeholders/default-product.png",
 		trim: true
 	},
 	images: [{
@@ -85,8 +85,37 @@ const productSchema = new mongoose.Schema(
 		ref: "Artist",
 		required: true
 	},
+	searchIndex: {
+		type: String,
+		lowercase: true,
+		select: false,
+	}
 }, {
 	timestamps: true
+});
+
+productSchema.pre("save", function () {
+	let textParts = [this.name];
+
+	// Handle the complex description array
+	if (this.description && this.description.length > 0) {
+		this.description.forEach((item) => {
+			if (item.type === "normal" && Array.isArray(item.data)) {
+				textParts.push(...item.data);
+			} else if (
+				item.type === "key-value-pair" &&
+				typeof item.data === "object"
+			) {
+				textParts.push(...Object.values(item.data));
+			}
+		});
+	}
+
+	if (this.notes && this.notes.length > 0) {
+		this.notes.forEach((note) => textParts.push(note.data));
+	}
+
+	this.searchIndex = textParts.join(" ");
 });
 
 const Product = mongoose.model("Product", productSchema);

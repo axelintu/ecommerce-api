@@ -35,18 +35,22 @@ export const createProduct = async (req, res, next) => {
 		const {
 			name,
 			description,
+			notes,
 			price,
 			stock,
 			imageURL,
+			images,
 			artist,
 			category,
 		} = req.body;
 		const newProduct = await Product.create({
 			name,
 			description,
+			notes,
 			price,
 			stock,
 			imageURL,
+			images,
 			artist,
 			category,
 		});
@@ -65,20 +69,39 @@ export const updateProduct = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const {
-			name, description, price, stock, imageURL, artist, category,
+			name, 
+			description, 
+			notes, 
+			price, 
+			stock, 
+			imageURL, 
+			images, 
+			artist, 
+			category,
 		} = req.body;
 
-		const updatedProduct = await Product.findByIdAndUpdate(
-			id,
-			{ name, description, price, stock, imageURL, artist, category },
-			{ new: true }
-		).populate("artist").populate("category");
-
-		if (!updatedProduct) {
+		if (!product) {
 			return res.status(404).json({ message: "Product not found" });
 		}
+		
+		const product = await Product.findById(id);
 
-		res.status(200).json(updatedProduct);
+		if (name)        {product.name = name};
+		if (description) {product.description = description};
+		if (notes)       {product.notes = notes};
+		if (price)       {product.price = price};
+		if (stock)       {product.stock = stock};
+		if (imageURL)    {product.imageURL = imageURL};
+		if (images)      {product.images = images};
+		if (artist)      {product.artist = artist};
+		if (category)    {product.category = category};
+
+		await product.save();
+		await product.populate("artist");
+		await product.populate("category");
+		const resProduct = product;
+
+		res.status(200).json(resProduct);
 	}
 	catch (error) { next(error); }
 };
@@ -87,7 +110,7 @@ export const deleteProduct = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const productToDelete = await Product.findOne(id);
+		const productToDelete = await Product.findByIdAndDelete(id);
 		if (!productToDelete) {
 			return res.status(404).json({ message: "Product not found" });
 		}
@@ -118,13 +141,10 @@ export const searchProducts = async (req, res, next) => {
 
 		let filters = {};
 		if (q) {
-			filters.$or = [
-				{ name: { $regex: q, $options: "i" } },
-				{ description: { $regex: q, $options: "i" } },
-			];
+			filters.searchIndex = { $regex: q, $options: "i" };
 		}
 		if (category) filters.category = category;
-		if (artist) filter.artist = artist;
+		if (artist) filters.artist = artist;
 
 		if (minPrice || maxPrice) {
 			filters.price = {};
