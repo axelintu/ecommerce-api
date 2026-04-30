@@ -1,0 +1,46 @@
+info:
+  name: Search
+  type: http
+  seq: 11
+
+http:
+  method: GET
+  url: "{{APIaddress}}/products/search?q=plagia&category=69f2679ed075c554c978fd9e&artist=&minPrice=20&maxPrice=20000&inStock=true&sort=name&order=asc&page=1&limit=5"
+  params:
+    - name: q
+      value: plagia
+      type: query
+    - name: category
+      value: 69f2679ed075c554c978fd9e
+      type: query
+    - name: artist
+      value: ""
+      type: query
+    - name: minPrice
+      value: "20"
+      type: query
+    - name: maxPrice
+      value: "20000"
+      type: query
+    - name: inStock
+      value: "true"
+      type: query
+    - name: sort
+      value: name
+      type: query
+    - name: order
+      value: asc
+      type: query
+    - name: page
+      value: "1"
+      type: query
+    - name: limit
+      value: "5"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: Fox of Wisteria Api Tests
+  name: Fox of Wisteria Api Tests v2
 config:
   proxy:
     inherit: true

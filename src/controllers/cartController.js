@@ -126,12 +126,6 @@ export const addProductToCart = async (req, res, next) => {
 	/* #swagger.tags = ['Cart']
 		#swagger.summary = 'Add item to cart'
 		#swagger.description = 'Adds a specific product to the user\'s cart.'
-		
-		#swagger.parameters['body'] = {
-			$productId: MongoDB ObjectId,
-			quantity: Number
-		}
-		
 		#swagger.responses[200] = { description: 'Item added successfully' }
 	*/
 	try {
