@@ -1,22 +1,24 @@
 info:
   name: 🌸 Yorushika - New 4
   type: http
-  seq: 4
+  seq: 5
 
 http:
   method: POST
   url: "{{APIaddress}}/{{endpoint}}"
   body:
     type: json
-    data: |2-
-      
+    data: |-
+      {
         "name": "Bolsa de tela reversible con temática de Plagiarism",
         "description": [
           {
             "tag": "p",
             "class": "info",
             "type": "normal",
-            "data": ["Este bolso tote reversible presenta bordado."]
+            "data": [
+              "Este bolso tote reversible presenta bordado."
+            ]
           },
           {
             "tag": "p",

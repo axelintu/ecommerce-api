@@ -15,6 +15,12 @@ runtime:
         test("Status code is 200", function () {
             expect(res.getStatus()).to.equal(200);
         });
+        const ids = [];
+        const products = res.getBody();
+        products.forEach((p)=>{
+          ids.push(p._id);
+        });
+        console.log(ids);
 
 settings:
   encodeUrl: true

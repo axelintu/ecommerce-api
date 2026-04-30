@@ -1,0 +1,21 @@
+info:
+  name: Add Product to Cart
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/{{endpoint}}/add/69f3a51432cfb2fdfd90e697"
+  body:
+    type: json
+    data: |-
+      {
+        "productId": "69f39504b13a1aec6f4aca83"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

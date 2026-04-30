@@ -1,0 +1,34 @@
+info:
+  name: UpdateCart
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{APIaddress}}/{{endpoint}}/:id"
+  params:
+    - name: id
+      value: 69f3a51432cfb2fdfd90e697
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "products": [
+          {
+            "product": "69f3948e4e0ae089cde7e15d",
+            "quantity": 4
+          },
+          {
+            "product": "69f3953cb13a1aec6f4aca91",
+            "quantity": 2
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

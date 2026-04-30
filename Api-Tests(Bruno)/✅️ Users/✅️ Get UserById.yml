@@ -8,7 +8,7 @@ http:
   url: "{{APIaddress}}/users/:id"
   params:
     - name: id
-      value: 69f10eaae846f503eff9fbc4
+      value: 69e9b25d4b4640ab55068ab1
       type: path
   auth: inherit
 

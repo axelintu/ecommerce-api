@@ -1,0 +1,24 @@
+info:
+  name: Cart by User
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{APIaddress}}/{{endpoint}}/user/:userId/"
+  params:
+    - name: userId
+      value: 69e9b25d4b4640ab55068ab1
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: endpoint
+      value: cart
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
