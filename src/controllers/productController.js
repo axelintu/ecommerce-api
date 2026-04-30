@@ -68,40 +68,36 @@ export const updateProduct = async (req, res, next) => {
 	*/
 	try {
 		const { id } = req.params;
-		const {
-			name, 
-			description, 
-			notes, 
-			price, 
-			stock, 
-			imageURL, 
-			images, 
-			artist, 
-			category,
-		} = req.body;
+
+		const editableFields = ['name', 'description', 'notes', 'price', 'stock', 'imageURL', 'images', 'artist', 'category'];
+		const publicFields = ['_id', 'name', 'description', 'notes', 'price', 'stock', 'imageURL', 'images', 'artist', 'category'];
+
+		const product = await Product.findById(id);
 
 		if (!product) {
 			return res.status(404).json({ message: "Product not found" });
 		}
-		
-		const product = await Product.findById(id);
 
-		if (name)        {product.name = name};
-		if (description) {product.description = description};
-		if (notes)       {product.notes = notes};
-		if (price)       {product.price = price};
-		if (stock)       {product.stock = stock};
-		if (imageURL)    {product.imageURL = imageURL};
-		if (images)      {product.images = images};
-		if (artist)      {product.artist = artist};
-		if (category)    {product.category = category};
+		editableFields.forEach((field) => {
+			let value = req.body[field];
+
+			if (typeof value === 'string') value = value.trim();
+			if (value || value === 0) {
+				product[field] = value;
+			}
+		});
 
 		await product.save();
+
 		await product.populate("artist");
 		await product.populate("category");
-		const resProduct = product;
 
-		res.status(200).json(resProduct);
+		const responseData = {};
+		publicFields.forEach(field => {
+			responseData[field] = product[field];
+		});
+
+		res.status(200).json(responseData);
 	}
 	catch (error) { next(error); }
 };
